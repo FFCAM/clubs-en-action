@@ -3,6 +3,12 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 
+// Define the response type for CSRF API
+interface CsrfResponse {
+  success: boolean;
+  csrfToken: string;
+}
+
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -17,7 +23,7 @@ export default function ContactForm() {
     const fetchCsrfToken = async () => {
       try {
         const response = await fetch('/api/csrf');
-        const data = await response.json();
+        const data = await response.json() as CsrfResponse;
         if (data.success) {
           setCsrfToken(data.csrfToken);
         }
@@ -85,9 +91,12 @@ export default function ContactForm() {
       setShareSolution(false);
       
       // Rafraîchir le token CSRF après un envoi réussi
-      fetch('/api/csrf').then(res => res.json()).then(data => {
-        if (data.success) setCsrfToken(data.csrfToken);
-      });
+      fetch('/api/csrf')
+        .then(res => res.json())
+        .then((data: unknown) => {
+          const csrfData = data as CsrfResponse;
+          if (csrfData.success) setCsrfToken(csrfData.csrfToken);
+        });
     } catch (error) {
       setSubmitStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Une erreur inattendue est survenue. Veuillez réessayer.');

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, MessageSquare, Users, Star, UserPlus } from "lucide-react";
+import { Calendar, Star, UserPlus } from "lucide-react";
 
 export default function WebinarsSection() {
   const upcomingThemes = [
@@ -80,7 +80,7 @@ export default function WebinarsSection() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {upcomingThemes.map((theme, index) => (
+            {upcomingThemes.map((theme) => (
               <Link
                 key={theme}
                 href="#contact"
