@@ -1,5 +1,7 @@
 # Clubs en Action - Documentation technique
 
+[![Deploy to Cloudflare Pages](https://github.com/ffcam/clubs-en-action/actions/workflows/cloudflare-pages-deploy.yml/badge.svg)](https://github.com/ffcam/clubs-en-action/actions/workflows/cloudflare-pages-deploy.yml)
+
 ## Description du projet
 
 "Clubs en Action" est une plateforme web permettant aux clubs de la FFCAM (Fédération Française des Clubs Alpins et de Montagne) de partager leurs solutions et bonnes pratiques via des webinaires trimestriels.
@@ -13,7 +15,7 @@
 
 ## Prérequis
 
-- Node.js (v18+)
+- Node.js (v22 LTS)
 - pnpm
 
 ## Installation
@@ -85,15 +87,22 @@ pnpm test
 
 ## Déploiement
 
-Le projet est configuré pour être déployé sur Cloudflare Pages. Le déploiement peut être effectué manuellement ou via des workflows CI/CD.
+Le projet est configuré pour être déployé sur Cloudflare Pages. Le déploiement s'effectue automatiquement via GitHub Actions lorsque des modifications sont poussées sur la branche principale.
 
 ```bash
 # Construction pour la production
 pnpm build
 
-# Déploiement sur Cloudflare Pages
+# Déploiement manuel sur Cloudflare Pages (si nécessaire)
 pnpm deploy
 ```
+
+### Automatisation CI/CD
+
+Des workflows GitHub Actions sont configurés pour :
+- Tester automatiquement les Pull Requests
+- Déployer automatiquement sur Cloudflare Pages à chaque push sur la branche main
+- Voir le dossier `.github/workflows` pour plus de détails sur la configuration
 
 ## Comment contribuer
 
