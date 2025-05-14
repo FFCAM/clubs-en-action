@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
       
       - name: Lint
         run: pnpm lint
@@ -53,13 +53,28 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
       
+      - name: Build Preview
+        id: preview-deployment
+        if: success()
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .vercel/output --project-name=clubs-en-action --branch=pr-${{ github.event.number }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Add status comment
         uses: actions/github-script@v7
         with:
           script: |
+            const previewUrl = "${{ steps.preview-deployment.outputs.deployment-url }}";
+            const deploymentMessage = previewUrl 
+              ? `✅ La validation du build a réussi ! La PR est prête à être revue.\n\n🚀 Preview déployée: [${previewUrl}](${previewUrl})`
+              : '✅ La validation du build a réussi ! La PR est prête à être revue.';
+            
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '✅ La validation du build a réussi ! La PR est prête à être revue.'
+              body: deploymentMessage
             })

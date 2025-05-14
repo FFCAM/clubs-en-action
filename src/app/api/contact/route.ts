@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendContactFormEmail } from "../../../utils/email";
+import { verifyCSRFToken } from "../../../utils/csrf";
 
 // Assurez-vous que la variable d'environnement RESEND_API_KEY est configurée dans votre projet Cloudflare
 
@@ -21,6 +22,7 @@ interface ContactFormData {
   message: string;
   newsletter?: string;
   timestamp?: string;
+  csrf_token?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -32,6 +34,33 @@ export async function POST(request: NextRequest) {
     const email = formData.get("email")?.toString();
     const club = formData.get("club")?.toString();
     const message = formData.get("message")?.toString();
+    const csrfToken = formData.get("csrf_token")?.toString();
+
+    // Double Submit Cookie Pattern: get CSRF token from cookie
+    const cookieCsrfToken = request.cookies.get("csrf")?.value;
+
+    // Validate CSRF token (Double Submit Cookie Pattern)
+    if (!csrfToken || !cookieCsrfToken || csrfToken !== cookieCsrfToken || !verifyCSRFToken(csrfToken)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Jeton de sécurité invalide ou expiré. Veuillez rafraîchir la page et réessayer.",
+        },
+        { status: 403 },
+      );
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email || '')) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "L'adresse email fournie n'est pas valide",
+        },
+        { status: 400 },
+      );
+    }
 
     // Validate required fields
     if (!name || !email || !club || !message) {
@@ -63,6 +92,7 @@ export async function POST(request: NextRequest) {
       "theme",
       "solution",
       "newsletter",
+      "csrf_token",
     ];
 
     optionalFields.forEach((field) => {

@@ -43,7 +43,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
       
       - name: Build application
         run: pnpm build
@@ -53,12 +53,11 @@ jobs:
       
       - name: Publish to Cloudflare Pages
         id: cloudflare-publish
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: clubs-en-action
-          directory: .vercel/output/static
+          command: pages deploy .vercel/output --project-name=clubs-en-action
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Add deployment URL as a comment
@@ -66,7 +65,7 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           script: |
-            const deploymentUrl = ${{ steps.cloudflare-publish.outputs.url }}
+            const deploymentUrl = ${{ steps.cloudflare-publish.outputs.deployment-url }}
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

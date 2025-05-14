@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow admin paths (none yet)
+# Disallow: /admin/
+
+# Sitemap
+Sitemap: https://clubs-en-action.ffcam.fr/sitemap.xml
