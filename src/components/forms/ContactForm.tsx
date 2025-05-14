@@ -18,21 +18,36 @@ export default function ContactForm() {
   const [suggestTheme, setSuggestTheme] = useState(false);
   const [shareSolution, setShareSolution] = useState(false);
 
-  // Récupération du token CSRF au chargement
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await fetch('/api/csrf');
-        const data = await response.json() as CsrfResponse;
-        if (data.success) {
-          setCsrfToken(data.csrfToken);
-        }
-      } catch (error) {
-        console.error('Erreur lors de la récupération du token CSRF:', error);
+  // Fonction réutilisable pour récupérer un token CSRF
+  const fetchCsrfToken = async () => {
+    try {
+      const response = await fetch('/api/csrf', {
+        credentials: 'same-origin',  // S'assurer que les cookies sont envoyés/reçus
+        cache: 'no-cache'  // Ne pas utiliser de cache
+      });
+      
+      const data = await response.json() as CsrfResponse;
+      
+      if (data.success) {
+        setCsrfToken(data.csrfToken);
+        return true;
       }
-    };
+      return false;
+    } catch (error) {
+      console.error('Erreur lors de la récupération du token CSRF:', error);
+      return false;
+    }
+  };
 
+  // Récupération du token CSRF au chargement et toutes les 10 minutes
+  useEffect(() => {
     fetchCsrfToken();
+    
+    // Rafraîchir le token régulièrement pour éviter qu'il n'expire
+    // (le token expire après 15 minutes, on le rafraîchit toutes les 10 minutes)
+    const interval = setInterval(fetchCsrfToken, 10 * 60 * 1000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,12 +84,48 @@ export default function ContactForm() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         body: formData,
+        credentials: 'same-origin', // Ensure cookies are sent with the request
       });
 
       const data = await response.json() as { success: boolean; error?: string; message?: string };
 
       if (!response.ok) {
         if (response.status === 403) {
+          // Tenter de rafraîchir le token CSRF automatiquement
+          try {
+            const csrfResponse = await fetch('/api/csrf');
+            const csrfData = await csrfResponse.json() as CsrfResponse;
+            if (csrfData.success) {
+              setCsrfToken(csrfData.csrfToken);
+              
+              // Retenter l'envoi avec le nouveau token
+              const newFormData = new FormData(form);
+              const newResponse = await fetch('/api/contact', {
+                method: 'POST',
+                body: newFormData,
+                credentials: 'same-origin', // Ensure cookies are sent with the request
+              });
+              
+              const newData = await newResponse.json() as { 
+                success: boolean; 
+                error?: string; 
+                message?: string;
+              };
+              
+              if (newResponse.ok) {
+                setSuccessMessage(newData.message || 'Merci pour votre contribution ! Nous vous recontacterons bientôt.');
+                setSubmitStatus('success');
+                form.reset();
+                setSuggestTheme(false);
+                setShareSolution(false);
+                return; // Sortir car le second envoi a réussi
+              }
+            }
+          } catch (csrfError) {
+            console.error('Erreur lors du rafraîchissement du token CSRF:', csrfError);
+          }
+          
+          // Si la tentative échoue, afficher l'erreur originale
           throw new Error(data.error || 'Session expirée. Veuillez rafraîchir la page.');
         } else if (response.status === 429) {
           throw new Error('Trop de tentatives. Veuillez réessayer dans quelques minutes.');
@@ -91,12 +142,7 @@ export default function ContactForm() {
       setShareSolution(false);
       
       // Rafraîchir le token CSRF après un envoi réussi
-      fetch('/api/csrf')
-        .then(res => res.json())
-        .then((data: unknown) => {
-          const csrfData = data as CsrfResponse;
-          if (csrfData.success) setCsrfToken(csrfData.csrfToken);
-        });
+      fetchCsrfToken();
     } catch (error) {
       setSubmitStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Une erreur inattendue est survenue. Veuillez réessayer.');
@@ -351,6 +397,7 @@ export default function ContactForm() {
                 </label>
               </div>
               {/* Token CSRF caché */}
+
               <input 
                 type="hidden" 
                 name="csrf_token" 
@@ -360,6 +407,7 @@ export default function ContactForm() {
                 type="submit"
                 disabled={isSubmitting || !csrfToken}
                 className="w-full rounded-lg bg-ffcam px-6 py-3 text-white transition hover:bg-ffcam-dark focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed relative"
+                onClick={!csrfToken ? () => fetchCsrfToken() : undefined}
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
