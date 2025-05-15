@@ -27,11 +27,11 @@ export default function HeroSection() {
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow">
-              Une plateforme collaborative pour partager les bonnes pratiques
-              entre clubs FFCAM. Webinaires participatifs où les clubs
-              présentent leurs solutions concrètes sur des sujets du quotidien
-              (gestion, communication, outils...), dans un esprit
-              d&apos;entraide.
+              Chaque jour, les clubs FFCAM font face à des défis similaires sans
+              toujours avoir l&apos;occasion de partager leurs solutions. Notre
+              réponse : des webinaires participatifs où les clubs échangent
+              leurs expériences concrètes sur des sujets du quotidien (gestion,
+              communication, outils...), dans un esprit d&apos;entraide.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
@@ -55,7 +55,7 @@ export default function HeroSection() {
               <div className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 shadow-md">
                 <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-sm font-medium text-white">
-                  Prochain webinaire : 24 juin • 20h à 21h30
+                  Prochain webinaire : lundi 23 juin • 20h à 21h30
                 </span>
                 <Link
                   href="#contact"
