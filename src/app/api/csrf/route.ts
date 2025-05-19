@@ -4,7 +4,7 @@ import { generateCSRFToken } from "../../../utils/csrf";
 // Required for Cloudflare Pages with Next.js app router
 export const runtime = "edge";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     // Génération d'un nouveau token CSRF
     const csrfToken = await generateCSRFToken();

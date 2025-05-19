@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check, AlertTriangle } from 'lucide-react';
+import { FFCAMSection, FFCAMHeading, FFCAMSubheading, FFCAMButton } from '@/components';
 
 // Define the response type for CSRF API
 interface CsrfResponse {
@@ -152,25 +153,25 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="bg-ffcam/5 py-20">
+    <FFCAMSection id="contact" background="light">
       <div className="mx-auto max-w-2xl px-4">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <FFCAMHeading level={2}>
             Participez à l&apos;aventure
-          </h2>
+          </FFCAMHeading>
           <p className="mt-4 text-lg text-gray-600">
             Partagez une solution, suggérez un thème, ou proposez votre aide pour faire vivre cette initiative.
           </p>
         </div>
         
         {/* Encart informatif sur l'équipe bénévole */}
-        <div className="mt-12 rounded-xl bg-ffcam/10 p-6 border-l-4 border-ffcam">
+        <div className="mt-12 rounded-xl bg-ffcam/10 p-6 border-l-4 border-ffcam shadow-sm">
           <div className="flex items-start gap-4">
             <div className="mt-1 flex-shrink-0 text-ffcam">
               <ArrowRight className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-base font-semibold text-gray-900">Initiative portée par des bénévoles</h3>
+              <FFCAMSubheading className="text-base !text-gray-900">Initiative portée par des bénévoles</FFCAMSubheading>
               <p className="mt-2 text-sm text-gray-600">
                 Clubs en Action est une initiative développée par des bénévoles passionnés. 
                 Nous faisons notre maximum pour répondre rapidement aux messages, mais nous avons aussi 
@@ -187,20 +188,18 @@ export default function ContactForm() {
         
         <div className="mt-6 rounded-2xl bg-white p-8 shadow-lg">
           {submitStatus === 'success' ? (
-            <div className="rounded-lg bg-green-50 p-4">
+            <div className="rounded-lg bg-green-50 p-4 border border-green-200">
               <div className="flex items-start">
-                <svg className="h-5 w-5 text-green-600 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <Check className="h-5 w-5 text-green-600 mt-0.5 mr-2 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-green-800">Envoi réussi !</p>
                   <p className="text-green-700">{successMessage}</p>
-                  <button
+                  <FFCAMButton
                     onClick={() => setSubmitStatus('idle')}
-                    className="mt-3 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm transition"
+                    className="mt-3 !bg-green-600 hover:!bg-green-700 !text-white text-sm"
                   >
                     Envoyer une autre contribution
-                  </button>
+                  </FFCAMButton>
                 </div>
               </div>
             </div>
@@ -210,17 +209,15 @@ export default function ContactForm() {
               onSubmit={handleSubmit}
             >
               {submitStatus === 'error' && (
-                <div className="rounded-lg bg-red-50 p-4">
+                <div className="rounded-lg bg-red-50 p-4 border border-red-200">
                   <div className="flex items-start">
-                    <svg className="h-5 w-5 text-red-600 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
+                    <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5 mr-2 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-red-800">Erreur</p>
                       <p className="text-red-700">{errorMessage}</p>
                       <button 
                         onClick={() => setSubmitStatus('idle')} 
-                        className="mt-2 text-sm text-red-600 hover:text-red-800 underline"
+                        className="mt-2 text-sm text-ffcam-red hover:text-red-800 underline font-medium"
                       >
                         Réessayer
                       </button>
@@ -403,10 +400,10 @@ export default function ContactForm() {
                 name="csrf_token" 
                 value={csrfToken} 
               />
-              <button
+              <FFCAMButton
                 type="submit"
                 disabled={isSubmitting || !csrfToken}
-                className="w-full rounded-lg bg-ffcam px-6 py-3 text-white transition hover:bg-ffcam-dark focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed relative"
+                className="w-full px-6 py-3 !text-white disabled:bg-gray-400 disabled:cursor-not-allowed relative"
                 onClick={!csrfToken ? () => fetchCsrfToken() : undefined}
               >
                 {isSubmitting ? (
@@ -420,11 +417,11 @@ export default function ContactForm() {
                 ) : (
                   csrfToken ? 'Envoyer ma contribution' : 'Chargement...'
                 )}
-              </button>
+              </FFCAMButton>
             </form>
           )}
         </div>
       </div>
-    </section>
+    </FFCAMSection>
   );
 }

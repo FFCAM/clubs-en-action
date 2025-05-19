@@ -13,14 +13,14 @@ const poppins = Poppins({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0073CF', // Couleur FFCAM
+  themeColor: '#0073CF', // Couleur principale FFCAM
 };
 
 export const metadata: Metadata = {
-  title: 'Clubs en Action',
-  description: 'Partageons les solutions des clubs FFCAM',
-  keywords: ['FFCAM', 'clubs', 'montagne', 'alpinisme', 'webinaires', 'partage'],
-  authors: [{ name: 'FFCAM' }],
+  title: 'Clubs en Action | FFCAM',
+  description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne',
+  keywords: ['FFCAM', 'clubs', 'montagne', 'alpinisme', 'webinaires', 'partage', 'clubs alpins'],
+  authors: [{ name: 'Fédération française des clubs alpins et de montagne' }],
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://clubs-en-action.ffcam.fr',
-    title: 'Clubs en Action',
-    description: 'Partageons les solutions des clubs FFCAM - Plateforme collaborative pour le partage de bonnes pratiques entre clubs',
-    siteName: 'Clubs en Action',
+    title: 'Clubs en Action | FFCAM',
+    description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne - Plateforme collaborative pour le partage de bonnes pratiques entre clubs',
+    siteName: 'Clubs en Action FFCAM',
     images: [
       {
         url: '/og-image.png',
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Clubs en Action',
-    description: 'Partageons les solutions des clubs FFCAM - Plateforme collaborative',
+    title: 'Clubs en Action | FFCAM',
+    description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne - Plateforme collaborative',
     images: ['/og-image.png'],
     creator: '@FFCAM_fr',
   },
@@ -58,7 +58,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${poppins.variable} scroll-smooth`}>
-      <body className="min-h-screen bg-white font-sans antialiased">
+      <body className="min-h-screen bg-white font-sans antialiased selection:bg-ffcam selection:text-white">
         {children}
       </body>
     </html>

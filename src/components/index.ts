@@ -10,3 +10,15 @@ export { default as SolutionsSection } from './home/SolutionsSection';
 
 // Form components
 export { default as ContactForm } from './forms/ContactForm';
+
+// FFCAM UI components
+export {
+  FFCAMButton,
+  FFCAMLinkButton,
+  FFCAMSection,
+  FFCAMHeading,
+  FFCAMSubheading,
+  FFCAMCard,
+  FFCAMBadge,
+  FFCAMArrowLink,
+} from './ui/FFCAMComponents';

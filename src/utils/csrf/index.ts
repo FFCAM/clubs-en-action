@@ -12,7 +12,7 @@ export async function generateCSRFToken(): Promise<string> {
   // Utilisation directe de randomUUID de l'API Web Crypto
   const uuid = crypto.randomUUID();
   const timestamp = Date.now();
-  
+
   // Format simple: uuid:timestamp
   return `${uuid}:${timestamp}`;
 }
@@ -22,14 +22,14 @@ export async function generateCSRFToken(): Promise<string> {
  */
 export function verifyCSRFToken(token: string): boolean {
   if (!token) return false;
-  
+
   // Décomposition du token
-  const parts = token.split(':');
+  const parts = token.split(":");
   if (parts.length !== 2) return false;
-  
-  const [_, timestampStr] = parts;
+
+  const [, timestampStr] = parts;
   const timestamp = parseInt(timestampStr, 10);
-  
+
   // Vérification de l'expiration uniquement
-  return (Date.now() - timestamp <= TOKEN_EXPIRATION);
+  return Date.now() - timestamp <= TOKEN_EXPIRATION;
 }

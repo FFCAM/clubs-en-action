@@ -7,10 +7,19 @@
 @import 'tailwindcss/utilities';
 
 /* ─────────────────────────────
-   Variables globales couleurs  */
+   Variables globales FFCAM     */
 :root {
+  /* Couleurs de base */
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Couleurs FFCAM */
+  --ffcam-blue: #0073CF;
+  --ffcam-blue-dark: #005CA3;
+  --ffcam-blue-light: #3399E0;
+  --ffcam-red: #E3051B;
+  --ffcam-gray: #5A5A5A;
+  
   /* La var --font-sans sera injectée par next/font (Poppins) */
 }
 
@@ -27,4 +36,36 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Styles FFCAM */
+.ffcam-button {
+  @apply bg-ffcam text-white font-medium px-4 py-2 rounded-md hover:bg-ffcam-dark 
+  hover:text-white transition-colors duration-200 inline-flex items-center justify-center;
+}
+
+.ffcam-button-outline {
+  @apply border border-ffcam text-ffcam font-medium px-4 py-2 rounded-md 
+  hover:bg-ffcam hover:text-white transition-colors duration-200 inline-flex items-center justify-center;
+}
+
+/* Augmenter la spécificité pour s'assurer que le texte reste blanc au hover */
+.ffcam-button-outline:hover {
+  color: white !important;
+}
+
+.ffcam-section {
+  @apply py-16 md:py-24;
+}
+
+.ffcam-heading {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-gray-900;
+}
+
+.ffcam-subheading {
+  @apply text-xl md:text-2xl font-semibold text-ffcam;
+}
+
+.ffcam-card {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden;
 }
