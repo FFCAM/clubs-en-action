@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex items-center gap-2">
             <Image
-              src="/images/Logo FFCAM_couleur.png" 
+              src="/images/Logo-FFCAM.png"
               alt="Logo FFCAM"
               width={100}
               height={40}
@@ -43,13 +43,14 @@ export default function Footer() {
             </Link>
           </div>
           <div className="mt-2">
-            <Link 
-              href="https://www.ffcam.fr" 
+            <Link
+              href="https://www.ffcam.fr"
               target="_blank"
-              rel="noopener noreferrer" 
+              rel="noopener noreferrer"
               className="text-xs text-white/70 hover:text-white transition-colors"
             >
-              © {new Date().getFullYear()} Fédération française des clubs alpins et de montagne
+              © {new Date().getFullYear()} Fédération française des clubs
+              alpins et de montagne
             </Link>
           </div>
         </div>

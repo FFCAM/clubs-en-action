@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { Menu } from 'lucide-react';
-import { useState } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import { Menu } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,35 +18,52 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
-              <Image 
-                src="/images/Logo FFCAM_couleur.png"
-                alt="Logo FFCAM" 
-                width={160} 
-                height={60} 
+              <Image
+                src="/images/Logo-FFCAM.png"
+                alt="Logo FFCAM"
+                width={160}
+                height={60}
                 className="h-10 w-auto"
                 priority
               />
-              <span className="ml-2 text-lg font-bold text-gray-900">Clubs en Action</span>
+              <span className="ml-2 text-lg font-bold text-gray-900">
+                Clubs en Action
+              </span>
             </Link>
           </div>
-          
-          <div data-testid="desktop-menu" className="hidden md:flex md:items-center md:gap-8">
-            <Link href="#vision" className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors">
+
+          <div
+            data-testid="desktop-menu"
+            className="hidden md:flex md:items-center md:gap-8"
+          >
+            <Link
+              href="#vision"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+            >
               Notre Vision
             </Link>
-            <Link href="#webinaires" className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors">
+            <Link
+              href="#webinaires"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+            >
               Webinaires
             </Link>
-            <Link href="#solutions" className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors">
+            <Link
+              href="#solutions"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+            >
               Solutions
             </Link>
-            <Link href="#contact" className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors">
+            <Link
+              href="#contact"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+            >
               Contact
             </Link>
           </div>
-          
+
           <div className="md:hidden">
-            <button 
+            <button
               data-testid="menu-button"
               className="flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
               onClick={toggleMobileMenu}
@@ -56,34 +73,37 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      
+
       {/* Menu mobile */}
       {mobileMenuOpen && (
-        <div data-testid="mobile-menu" className="md:hidden bg-white border-b border-gray-200 shadow-sm">
+        <div
+          data-testid="mobile-menu"
+          className="md:hidden bg-white border-b border-gray-200 shadow-sm"
+        >
           <div className="flex flex-col space-y-2 px-4 py-3">
-            <Link 
-              href="#vision" 
+            <Link
+              href="#vision"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Notre Vision
             </Link>
-            <Link 
-              href="#webinaires" 
+            <Link
+              href="#webinaires"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Webinaires
             </Link>
-            <Link 
-              href="#solutions" 
+            <Link
+              href="#solutions"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Solutions
             </Link>
-            <Link 
-              href="#contact" 
+            <Link
+              href="#contact"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
