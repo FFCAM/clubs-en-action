@@ -12,8 +12,8 @@ export default function VisionSection() {
         </FFCAMHeading>
         <p className="mt-6 text-lg leading-8 text-gray-600">
           Construisons ensemble une communauté de clubs qui s&apos;entraident
-          et partagent leurs expériences et solutions pour face aux
-          défis quotidiens.
+          et partagent directement leurs expériences et solutions face aux
+          défis quotidiens, pour multiplier nos ressources et nos compétences.
         </p>
       </div>
 
@@ -29,8 +29,8 @@ export default function VisionSection() {
               </FFCAMSubheading>
               <p className="mt-4 text-gray-600">
                 Découvrez des solutions éprouvées par d&apos;autres clubs. Des
-                approches pragmatiques qui répondent aux problématiques réelles
-                des clubs FFCAM.
+                approches pragmatiques issues du terrain, développées par les clubs
+                eux-mêmes pour répondre efficacement à leurs besoins concrets.
               </p>
             </div>
           </FFCAMCard>
@@ -45,9 +45,9 @@ export default function VisionSection() {
                 Par les clubs, pour les clubs
               </FFCAMSubheading>
               <p className="mt-4 text-gray-600">
-                Ce sont les clubs eux-mêmes qui partagent leurs expériences. Pas
-                de théorie, juste des retours d&apos;expérience sincères et
-                accessibles.
+                Une initiative portée par les clubs eux-mêmes. Nous échangeons directement
+                entre nous pour mettre en commun nos savoir-faire et développer ensemble
+                des solutions adaptées à nos réalités locales.
               </p>
             </div>
           </FFCAMCard>
@@ -62,9 +62,9 @@ export default function VisionSection() {
                 Entraide et partage
               </FFCAMSubheading>
               <p className="mt-4 text-gray-600">
-                Un espace d&apos;échange bienveillant où vous pouvez poser vos
-                questions, apporter vos idées et renforcer les liens entre
-                clubs.
+                Un espace d&apos;échange bienveillant entre clubs qui renforce nos liens
+                et permet de mutualiser nos forces. Un réseau d&apos;entraide où chacun
+                peut apporter son expertise et bénéficier de celle des autres.
               </p>
             </div>
           </FFCAMCard>

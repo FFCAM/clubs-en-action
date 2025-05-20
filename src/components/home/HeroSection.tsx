@@ -28,11 +28,11 @@ export default function HeroSection() {
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow">
-              Chaque jour, les clubs FFCAM font face à des défis similaires sans
-              toujours avoir l&apos;occasion de partager leurs solutions. Notre
-              réponse : des webinaires participatifs où les clubs échangent
-              leurs expériences concrètes sur des sujets du quotidien (gestion,
-              communication, outils...), dans un esprit d&apos;entraide.
+              Chaque jour, les clubs FFCAM font face à des défis similaires et disposent 
+              d&apos;une riche expérience à partager. Notre initiative : créer des espaces 
+              d&apos;échange directs entre clubs, où vous partagez vos solutions concrètes 
+              sur des sujets du quotidien (gestion, communication, outils...), dans un 
+              esprit de collaboration et d&apos;entraide mutuelle.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">

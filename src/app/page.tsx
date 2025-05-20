@@ -7,6 +7,7 @@ import {
   VisionSection,
   WebinarsSection,
   // SolutionsSection, // Temporairement masqué - à réactiver ultérieurement
+  FAQSection,
   ContactForm
 } from '@/components';
 
@@ -18,6 +19,7 @@ export default function Home() {
       <VisionSection />
       <WebinarsSection />
       {/* <SolutionsSection /> */}
+      <FAQSection />
       <ContactForm />
       <Footer />
     </main>

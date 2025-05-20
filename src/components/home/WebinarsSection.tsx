@@ -24,8 +24,8 @@ export default function WebinarsSection() {
         </FFCAMHeading>
         <p className="mt-6 text-lg leading-8 text-gray-600">
           Des sessions d&apos;échange trimestrielles où les clubs présentent
-          leurs solutions concrètes. Posez vos questions, partagez vos idées,
-          et repartez avec des solutions adaptables à votre contexte.
+          leurs solutions concrètes issues du terrain. Un espace d&apos;entraide directe
+          entre clubs, par les clubs et pour les clubs, pour enrichir nos pratiques.
         </p>
       </div>
 
@@ -39,7 +39,7 @@ export default function WebinarsSection() {
               Sur un thème donné (ex: &quot;Booster sa communication
               interne&quot;), 2 ou 3 clubs présentent leur approche, leurs
               outils, leurs réussites. Suivi d&apos;un temps d&apos;échange pour
-              adapter ces solutions à votre contexte.
+              adapter ces solutions à votre contexte et créer des liens directs entre clubs.
             </p>
           </FFCAMCard>
 
@@ -49,10 +49,10 @@ export default function WebinarsSection() {
               L&apos;Organisation
             </FFCAMSubheading>
             <p className="relative mt-4 text-gray-600">
-              Des sessions en ligne de 1h30, organisées environ tous les 3 mois.
-              Une animation par des bénévoles passionnés, dans une ambiance
-              conviviale et constructive. Ouvert à tous les bénévoles des clubs
-              FFCAM.
+              Des sessions en ligne de 1h30, organisées environ tous les 3 mois
+              par les clubs pour les clubs. Une initiative collaborative, animée par des 
+              bénévoles passionnés, pour mutualiser nos expertises et renforcer
+              nos compétences collectives dans une ambiance conviviale.
             </p>
           </FFCAMCard>
 
@@ -64,7 +64,8 @@ export default function WebinarsSection() {
             <p className="relative mt-4 text-gray-600">
               Vous pouvez simplement assister, poser des questions, ou proposer
               de présenter vos solutions lors d&apos;un prochain webinaire.
-              Toutes les contributions sont précieuses !
+              L&apos;objectif est de créer une communauté active de clubs qui partagent
+              leurs expériences et développent ensemble des solutions adaptées à leurs besoins.
             </p>
           </FFCAMCard>
         </div>
