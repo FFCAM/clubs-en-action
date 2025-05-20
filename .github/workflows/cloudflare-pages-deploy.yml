@@ -55,6 +55,22 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
       
+      - name: Install dependencies for Lighthouse CI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq chromium-browser
+          
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.11.x puppeteer
+
+      - name: Run Lighthouse CI
+        run: |
+          export CHROME_PATH=$(which chromium-browser)
+          lhci autorun --collect.chromePath="$CHROME_PATH"
+        continue-on-error: true
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
       # Deployment to Cloudflare Pages has been disabled
       # Uncomment the following section to re-enable manual deployment
       # - name: Publish to Cloudflare Pages
