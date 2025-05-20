@@ -1,10 +1,9 @@
 name: Build and Test (Manual Trigger Only)
 
 on:
-  # Automatic deployment disabled
-  # push:
-  #  branches:
-  #    - main
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
