@@ -91,7 +91,7 @@ export function FFCAMButton({
   return (
     <button className={classes} {...props}>
       {children}
-      {icon && <span className="ml-2" aria-hidden={!props.iconDescription} role={props.iconDescription ? "img" : undefined} aria-label={props.iconDescription}>{icon}</span>}
+      {icon && <span className="ml-2" aria-hidden={!props.iconDescription} aria-label={props.iconDescription || undefined}>{icon}</span>}
     </button>
   );
 }
@@ -141,7 +141,7 @@ export function FFCAMLinkButton({
   return (
     <Link href={href} className={classes} {...externalProps}>
       {children}
-      {icon && <span className="ml-2" aria-hidden={!iconDescription} role={iconDescription ? "img" : undefined} aria-label={iconDescription}>{icon}</span>}
+      {icon && <span className="ml-2" aria-hidden={!iconDescription} aria-label={iconDescription || undefined}>{icon}</span>}
       {external && <span className="sr-only">(S'ouvre dans un nouvel onglet)</span>}
     </Link>
   );
@@ -270,14 +270,14 @@ export function FFCAMCard({
 export function FFCAMBadge({
   children,
   className = '',
-  role = 'status',
+  role,
 }: {
   children: ReactNode;
   className?: string;
   role?: string;
 }) {
   const classes = twMerge(
-    'inline-flex items-center rounded-full bg-ffcam/10 px-2.5 py-0.5 text-xs font-medium text-ffcam',
+    'inline-flex items-center rounded-full bg-ffcam/15 px-2.5 py-0.5 text-xs font-medium text-ffcam-dark',
     className
   );
   

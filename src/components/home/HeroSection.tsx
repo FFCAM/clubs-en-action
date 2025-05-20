@@ -79,7 +79,6 @@ export default function HeroSection() {
                 alt="Adhérents FFCAM collaborant ensemble"
                 fill
                 className="object-cover object-center"
-                role="img"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-ffcam/20 to-ffcam-dark/20 backdrop-filter backdrop-brightness-90"></div>
             </div>

@@ -32,10 +32,9 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div
+          <nav
             data-testid="desktop-menu"
             className="hidden md:flex md:items-center md:gap-8"
-            role="navigation"
             aria-label="Menu principal"
           >
             <Link
@@ -62,7 +61,7 @@ export default function Navbar() {
             >
               Contact
             </Link>
-          </div>
+          </nav>
 
           <div className="md:hidden">
             <button
@@ -81,11 +80,10 @@ export default function Navbar() {
 
       {/* Menu mobile */}
       {mobileMenuOpen && (
-        <div
+        <nav
           id="mobile-menu"
           data-testid="mobile-menu"
           className="md:hidden bg-white border-b border-gray-200 shadow-sm"
-          role="navigation"
           aria-label="Menu mobile"
         >
           <div className="flex flex-col space-y-2 px-4 py-3">
@@ -118,7 +116,7 @@ export default function Navbar() {
               Contact
             </Link>
           </div>
-        </div>
+        </nav>
       )}
     </nav>
   );

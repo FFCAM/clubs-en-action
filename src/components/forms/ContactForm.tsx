@@ -19,6 +19,7 @@ export default function ContactForm() {
   const [csrfToken, setCsrfToken] = useState('');
   const [suggestTheme, setSuggestTheme] = useState(false);
   const [shareSolution, setShareSolution] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
   
   // Génération d'IDs uniques pour les champs du formulaire
   const formId = useId();
@@ -92,6 +93,7 @@ export default function ContactForm() {
         }
       });
 
+      setStatusMessage('Envoi du formulaire en cours...');
       const response = await fetch('/api/contact', {
         method: 'POST',
         body: formData,
@@ -163,7 +165,7 @@ export default function ContactForm() {
   };
 
   return (
-    <FFCAMSection id="contact" background="light">
+    <FFCAMSection id="contact" background="white">
       <div className="mx-auto max-w-2xl px-4">
         <div className="text-center">
           <FFCAMHeading level={2}>
@@ -175,7 +177,7 @@ export default function ContactForm() {
         </div>
         
         {/* Encart informatif sur l'équipe bénévole */}
-        <div className="mt-12 rounded-xl bg-ffcam/10 p-6 border-l-4 border-ffcam shadow-sm">
+        <div className="mt-12 rounded-xl bg-ffcam/15 p-6 border-l-4 border-ffcam shadow-sm">
           <div className="flex items-start gap-4">
             <div className="mt-1 flex-shrink-0 text-ffcam">
               <ArrowRight className="h-5 w-5" />
@@ -188,7 +190,7 @@ export default function ContactForm() {
                 nos activités professionnelles et personnelles. Merci de votre compréhension !
               </p>
               <div className="mt-3">
-                <span className="text-sm font-medium text-ffcam">
+                <span className="text-sm font-medium text-ffcam-dark">
                   Contactez-nous via le formulaire
                 </span>
               </div>
@@ -205,7 +207,10 @@ export default function ContactForm() {
                   <p className="font-medium text-green-800">Envoi réussi !</p>
                   <p className="text-green-700">{successMessage}</p>
                   <FFCAMButton
-                    onClick={() => setSubmitStatus('idle')}
+                    onClick={() => {
+                      setSubmitStatus('idle');
+                      setStatusMessage('Formulaire réinitialisé pour une nouvelle contribution');
+                    }}
                     className="mt-3 !bg-green-600 hover:!bg-green-700 !text-white text-sm"
                   >
                     Envoyer une autre contribution
@@ -228,7 +233,10 @@ export default function ContactForm() {
                       <p className="font-medium text-red-800">Erreur</p>
                       <p className="text-red-700">{errorMessage}</p>
                       <button 
-                        onClick={() => setSubmitStatus('idle')} 
+                        onClick={() => {
+                          setSubmitStatus('idle');
+                          setStatusMessage('Formulaire réinitialisé');
+                        }} 
                         className="mt-2 text-sm text-ffcam-red hover:text-red-800 underline font-medium focus:outline-none focus:ring-2 focus:ring-red-500 rounded"
                         type="button"
                       >
@@ -432,9 +440,9 @@ export default function ContactForm() {
                 disabled={isSubmitting || !csrfToken}
                 className="w-full px-6 py-3 !text-white disabled:bg-gray-400 disabled:cursor-not-allowed relative"
                 onClick={!csrfToken ? () => fetchCsrfToken() : undefined}
-                aria-live="polite"
                 aria-busy={isSubmitting}
               >
+                <div className="sr-only" aria-live="polite">{statusMessage}</div>
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
