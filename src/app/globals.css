@@ -36,22 +36,51 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+/* Amélioration de l'accessibilité pour les liens de saut */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ffcam-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.skip-to-content:focus {
+  top: 0;
 }
 
 /* Styles FFCAM */
 .ffcam-button {
   @apply bg-ffcam text-white font-medium px-4 py-2 rounded-md hover:bg-ffcam-dark 
-  hover:text-white transition-colors duration-200 inline-flex items-center justify-center;
+  hover:text-white transition-colors duration-200 inline-flex items-center justify-center
+  focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2;
 }
 
 .ffcam-button-outline {
   @apply border border-ffcam text-ffcam font-medium px-4 py-2 rounded-md 
-  hover:bg-ffcam hover:text-white transition-colors duration-200 inline-flex items-center justify-center;
+  hover:bg-ffcam hover:text-white transition-colors duration-200 inline-flex items-center justify-center
+  focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2;
 }
 
 /* Augmenter la spécificité pour s'assurer que le texte reste blanc au hover */
 .ffcam-button-outline:hover {
   color: white !important;
+}
+
+/* Accessibilité des liens */
+a:focus-visible {
+  outline: 2px solid var(--ffcam-blue);
+  outline-offset: 2px;
 }
 
 .ffcam-section {
@@ -68,4 +97,38 @@ body {
 
 .ffcam-card {
   @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden;
+}
+
+/* Styles pour Screen Reader uniquement */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Réduire les mouvements pour les utilisateurs qui le préfèrent */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Focus amélioré pour le clavier */
+*:focus-visible {
+  outline: 2px solid var(--ffcam-blue);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
 }

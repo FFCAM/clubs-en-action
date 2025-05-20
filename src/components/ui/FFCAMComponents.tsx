@@ -13,6 +13,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
   icon?: ReactNode;
   className?: string;
+  iconDescription?: string; // Description for the icon for screen readers
 }
 
 // Link Button Props
@@ -24,6 +25,8 @@ interface LinkButtonProps {
   icon?: ReactNode;
   className?: string;
   external?: boolean;
+  iconDescription?: string; // Description for the icon for screen readers
+  ariaLabel?: string; // Aria label for the link
 }
 
 // Section Props
@@ -48,6 +51,8 @@ interface CardProps {
   className?: string;
   hover?: boolean;
   padding?: boolean;
+  role?: string; // ARIA role
+  ariaLabel?: string; // Accessible label
 }
 
 // FFCAM Button
@@ -59,7 +64,7 @@ export function FFCAMButton({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseStyles = 'font-medium rounded-md transition-colors duration-200 inline-flex items-center justify-center';
+  const baseStyles = 'font-medium rounded-md transition-colors duration-200 inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ffcam';
   
   const variantStyles = {
     primary: 'bg-ffcam text-white hover:bg-ffcam-dark hover:text-white',
@@ -86,7 +91,7 @@ export function FFCAMButton({
   return (
     <button className={classes} {...props}>
       {children}
-      {icon && <span className="ml-2">{icon}</span>}
+      {icon && <span className="ml-2" aria-hidden={!props.iconDescription} role={props.iconDescription ? "img" : undefined} aria-label={props.iconDescription}>{icon}</span>}
     </button>
   );
 }
@@ -100,6 +105,8 @@ export function FFCAMLinkButton({
   icon,
   className = '',
   external = false,
+  iconDescription,
+  ariaLabel,
 }: LinkButtonProps) {
   const baseStyles = 'font-medium rounded-md transition-colors duration-200 inline-flex items-center justify-center';
   
@@ -125,12 +132,17 @@ export function FFCAMLinkButton({
     className
   );
   
-  const externalProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+  const externalProps = external ? { 
+    target: '_blank', 
+    rel: 'noopener noreferrer',
+    'aria-label': ariaLabel ? `${ariaLabel} (s'ouvre dans un nouvel onglet)` : `${typeof children === 'string' ? children : ''} (s'ouvre dans un nouvel onglet)`
+  } : { 'aria-label': ariaLabel };
   
   return (
     <Link href={href} className={classes} {...externalProps}>
       {children}
-      {icon && <span className="ml-2">{icon}</span>}
+      {icon && <span className="ml-2" aria-hidden={!iconDescription} role={iconDescription ? "img" : undefined} aria-label={iconDescription}>{icon}</span>}
+      {external && <span className="sr-only">(S'ouvre dans un nouvel onglet)</span>}
     </Link>
   );
 }
@@ -258,16 +270,18 @@ export function FFCAMCard({
 export function FFCAMBadge({
   children,
   className = '',
+  role = 'status',
 }: {
   children: ReactNode;
   className?: string;
+  role?: string;
 }) {
   const classes = twMerge(
     'inline-flex items-center rounded-full bg-ffcam/10 px-2.5 py-0.5 text-xs font-medium text-ffcam',
     className
   );
   
-  return <span className={classes}>{children}</span>;
+  return <span className={classes} role={role}>{children}</span>;
 }
 
 // FFCAM Arrow Link
@@ -275,20 +289,31 @@ export function FFCAMArrowLink({
   href,
   children,
   className = '',
+  external = false,
+  ariaLabel,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
+  external?: boolean;
+  ariaLabel?: string;
 }) {
   const classes = twMerge(
     'inline-flex items-center font-medium text-ffcam hover:text-ffcam-dark',
     className
   );
   
+  const externalProps = external ? { 
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    'aria-label': ariaLabel ? `${ariaLabel} (s'ouvre dans un nouvel onglet)` : `${typeof children === 'string' ? children : ''} (s'ouvre dans un nouvel onglet)`
+  } : { 'aria-label': ariaLabel };
+  
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} {...externalProps}>
       {children}
-      <ArrowRight className="ml-1 h-4 w-4" />
+      <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
+      {external && <span className="sr-only">(S'ouvre dans un nouvel onglet)</span>}
     </Link>
   );
 }

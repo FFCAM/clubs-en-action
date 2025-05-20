@@ -20,7 +20,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/images/Logo-FFCAM.png"
-                alt="Logo FFCAM"
+                alt="Logo FFCAM - Fédération française des clubs alpins et de montagne"
                 width={160}
                 height={60}
                 className="h-10 w-auto"
@@ -35,28 +35,30 @@ export default function Navbar() {
           <div
             data-testid="desktop-menu"
             className="hidden md:flex md:items-center md:gap-8"
+            role="navigation"
+            aria-label="Menu principal"
           >
             <Link
               href="#vision"
-              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Notre Vision
             </Link>
             <Link
               href="#webinaires"
-              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Webinaires
             </Link>
             <Link
               href="#solutions"
-              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Solutions
             </Link>
             <Link
               href="#contact"
-              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors"
+              className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Contact
             </Link>
@@ -67,8 +69,11 @@ export default function Navbar() {
               data-testid="menu-button"
               className="flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
               onClick={toggleMobileMenu}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label="Menu principal"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -77,34 +82,37 @@ export default function Navbar() {
       {/* Menu mobile */}
       {mobileMenuOpen && (
         <div
+          id="mobile-menu"
           data-testid="mobile-menu"
           className="md:hidden bg-white border-b border-gray-200 shadow-sm"
+          role="navigation"
+          aria-label="Menu mobile"
         >
           <div className="flex flex-col space-y-2 px-4 py-3">
             <Link
               href="#vision"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Notre Vision
             </Link>
             <Link
               href="#webinaires"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Webinaires
             </Link>
             <Link
               href="#solutions"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Solutions
             </Link>
             <Link
               href="#contact"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact

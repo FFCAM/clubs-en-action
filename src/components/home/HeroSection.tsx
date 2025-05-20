@@ -15,6 +15,7 @@ export default function HeroSection() {
           fill
           className="object-cover object-center"
           priority
+          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ffcam/70 to-ffcam-dark/70 mix-blend-multiply" />
       </div>
@@ -37,15 +38,17 @@ export default function HeroSection() {
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link
                 href="#webinaires"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-ffcam transition hover:bg-ffcam hover:text-white"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-ffcam transition hover:bg-ffcam hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-ffcam"
+                aria-label="Découvrir les webinaires"
               >
                 Découvrir les webinaires
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
 
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-lg border border-white px-6 py-3 font-semibold text-white transition hover:bg-white/20"
+                className="inline-flex items-center justify-center rounded-lg border border-white px-6 py-3 font-semibold text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1"
+                aria-label="Proposer une solution"
               >
                 Proposer une solution
               </Link>
@@ -53,16 +56,17 @@ export default function HeroSection() {
 
             <div className="mt-12 flex">
               <div className="flex items-center gap-2 rounded-full bg-ffcam-dark/40 backdrop-blur-sm px-4 py-2 shadow-md border border-white/20">
-                <span className="h-2 w-2 rounded-full bg-ffcam-red animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-ffcam-red animate-pulse" aria-hidden="true" />
                 <span className="text-sm font-medium text-white">
                   Prochain webinaire : lundi 23 juin • 20h à 21h30
                 </span>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center gap-2 rounded-lg bg-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-ffcam-red transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-ffcam-red transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1"
+                  aria-label="S'inscrire au prochain webinaire"
                 >
                   S&apos;inscrire
-                  <ArrowRight className="h-3 w-3" />
+                  <ArrowRight className="h-3 w-3" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -75,6 +79,7 @@ export default function HeroSection() {
                 alt="Adhérents FFCAM collaborant ensemble"
                 fill
                 className="object-cover object-center"
+                role="img"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-ffcam/20 to-ffcam-dark/20 backdrop-filter backdrop-brightness-90"></div>
             </div>

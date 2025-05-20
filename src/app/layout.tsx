@@ -14,9 +14,12 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: '#0073CF', // Couleur principale FFCAM
+  minimumScale: 1,
+  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://clubs-en-action.ffcam.fr'),
   title: 'Clubs en Action | FFCAM',
   description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne',
   keywords: ['FFCAM', 'clubs', 'montagne', 'alpinisme', 'webinaires', 'partage', 'clubs alpins'],
@@ -25,6 +28,19 @@ export const metadata: Metadata = {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/apple-touch-icon.png',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Clubs en Action'
+  },
+  applicationName: 'Clubs en Action FFCAM',
+  formatDetection: {
+    telephone: true,
+    date: true,
+    address: true,
+    email: true,
+    url: true
   },
   openGraph: {
     type: 'website',
@@ -58,8 +74,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${poppins.variable} scroll-smooth`}>
+      <head>
+        <meta name="theme-color" content="#0073CF" />
+        <meta name="color-scheme" content="light" />
+      </head>
       <body className="min-h-screen bg-white font-sans antialiased selection:bg-ffcam selection:text-white">
-        {children}
+        <a href="#main-content" className="skip-to-content">
+          Aller au contenu principal
+        </a>
+        <div id="main-content" className="contents">
+          {children}
+        </div>
       </body>
     </html>
   );
