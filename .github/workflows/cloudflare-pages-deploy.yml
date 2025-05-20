@@ -1,13 +1,14 @@
-name: Deploy to Cloudflare Pages
+name: Build and Test (Manual Trigger Only)
 
 on:
-  push:
-    branches:
-      - main
+  # Automatic deployment disabled
+  # push:
+  #  branches:
+  #    - main
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build-and-test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -45,30 +46,35 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       
+      - name: Run tests
+        run: pnpm test
+      
       - name: Build application
         run: pnpm build
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
       
-      - name: Publish to Cloudflare Pages
-        id: cloudflare-publish
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .vercel/output --project-name=clubs-en-action
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Add deployment URL as a comment
-        uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
-        with:
-          script: |
-            const deploymentUrl = ${{ steps.cloudflare-publish.outputs.deployment-url }}
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `🚀 Déploiement de prévisualisation disponible: [${deploymentUrl}](${deploymentUrl})`
-            })
+      # Deployment to Cloudflare Pages has been disabled
+      # Uncomment the following section to re-enable manual deployment
+      # - name: Publish to Cloudflare Pages
+      #   id: cloudflare-publish
+      #   uses: cloudflare/wrangler-action@v3
+      #   with:
+      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     command: pages deploy .vercel/output --project-name=clubs-en-action
+      #     gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      #
+      # - name: Add deployment URL as a comment
+      #   uses: actions/github-script@v7
+      #   if: github.event_name == 'pull_request'
+      #   with:
+      #     script: |
+      #       const deploymentUrl = ${{ steps.cloudflare-publish.outputs.deployment-url }}
+      #       github.rest.issues.createComment({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: `🚀 Déploiement de prévisualisation disponible: [${deploymentUrl}](${deploymentUrl})`
+      #       })
