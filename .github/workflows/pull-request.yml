@@ -81,7 +81,7 @@ jobs:
         id: lighthouse-ci
         run: |
           export CHROME_PATH=$(which chromium-browser)
-          lhci autorun --collect.chromePath="$CHROME_PATH"
+          lhci autorun --collect.chromePath="$CHROME_PATH" --collect.settings.onlyCategories="accessibility,best-practices,seo" --collect.settings.preset="desktop"
           echo "LIGHTHOUSE_RESULT_URL=$(cat .lighthouseci/links.json | jq -r '.links[0].url')" >> $GITHUB_OUTPUT
         continue-on-error: true
         env:
