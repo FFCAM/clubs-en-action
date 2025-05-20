@@ -12,7 +12,8 @@
     "preview": "pnpm pages:build && wrangler pages dev",
     "deploy": "pnpm pages:build && wrangler pages deploy",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "clsx": "^2.1.1",
