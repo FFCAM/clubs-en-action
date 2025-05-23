@@ -10,7 +10,7 @@ export default function HeroSection() {
       {/* Image de montagne en arrière-plan */}
       <div className="absolute inset-0">
         <Image
-          src="/images/mountains.jpg"
+          src="/images/mountains.webp"
           alt="Montagnes FFCAM avec mer de nuages"
           fill
           className="object-cover object-center"
@@ -24,15 +24,18 @@ export default function HeroSection() {
           <div className="lg:col-span-7">
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl xl:text-6xl drop-shadow-md">
               <span className="block">Ensemble, innovons</span>
-              <span className="block text-white">pour nos <span className="text-ffcam-red">clubs</span></span>
+              <span className="block text-white">
+                pour nos <span className="text-ffcam-red">clubs</span>
+              </span>
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow">
-              Chaque jour, les clubs FFCAM font face à des défis similaires et disposent 
-              d&apos;une riche expérience à partager. Notre initiative : créer des espaces 
-              d&apos;échange directs entre clubs, où vous partagez vos solutions concrètes 
-              sur des sujets du quotidien (gestion, communication, outils...), dans un 
-              esprit de collaboration et d&apos;entraide mutuelle.
+              Chaque jour, les clubs FFCAM font face à des défis similaires et
+              disposent d&apos;une riche expérience à partager. Notre initiative
+              : créer des espaces d&apos;échange directs entre clubs, où vous
+              partagez vos solutions concrètes sur des sujets du quotidien
+              (gestion, communication, outils...), dans un esprit de
+              collaboration et d&apos;entraide mutuelle.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
@@ -56,7 +59,10 @@ export default function HeroSection() {
 
             <div className="mt-12 flex">
               <div className="flex items-center gap-2 rounded-full bg-ffcam-dark/40 backdrop-blur-sm px-4 py-2 shadow-md border border-white/20">
-                <span className="h-2 w-2 rounded-full bg-ffcam-red animate-pulse" aria-hidden="true" />
+                <span
+                  className="h-2 w-2 rounded-full bg-ffcam-red animate-pulse"
+                  aria-hidden="true"
+                />
                 <span className="text-sm font-medium text-white">
                   Prochain webinaire : lundi 23 juin • 20h à 21h30
                 </span>
