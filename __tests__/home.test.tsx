@@ -1,16 +1,15 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import Home from '../src/app/page';
+import Home from '../src/components/home/Home';
 
 // Mock des composants pour faciliter les tests
-jest.mock('@/components', () => ({
-  Navbar: () => <div data-testid="navbar">Navbar Mock</div>,
-  Footer: () => <div data-testid="footer">Footer Mock</div>,
-  HeroSection: () => <div data-testid="hero-section">HeroSection Mock</div>,
-  VisionSection: () => <div data-testid="vision-section">VisionSection Mock</div>,
-  WebinarsSection: () => <div data-testid="webinars-section">WebinarsSection Mock</div>,
-  ContactForm: () => <div data-testid="contact-form">ContactForm Mock</div>,
-}));
+jest.mock('@/components/layout/Navbar', () => () => <div data-testid="navbar">Navbar Mock</div>);
+jest.mock('@/components/layout/Footer', () => () => <div data-testid="footer">Footer Mock</div>);
+jest.mock('@/components/home/HeroSection', () => () => <div data-testid="hero-section">HeroSection Mock</div>);
+jest.mock('@/components/home/VisionSection', () => () => <div data-testid="vision-section">VisionSection Mock</div>);
+jest.mock('@/components/home/WebinarsSection', () => () => <div data-testid="webinars-section">WebinarsSection Mock</div>);
+jest.mock('@/components/forms/ContactForm', () => () => <div data-testid="contact-form">ContactForm Mock</div>);
+jest.mock('@/components/home/FAQSection', () => () => <div data-testid="faq-section">FAQSection Mock</div>);
 
 describe('Page d\'accueil', () => {
   it('rend la page sans erreur', () => {

@@ -19,10 +19,12 @@ jest.mock('next/navigation', () => ({
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (props) => {
+    // Remove 'priority' prop to avoid React warning in tests
+    const { priority, ...rest } = props;
     // Ensure alt attribute is present for accessibility
     const imgProps = { 
-      ...props,
-      alt: props.alt || '' // Use empty alt for decorative images if not provided
+      ...rest,
+      alt: rest.alt || '' // Use empty alt for decorative images if not provided
     };
     return <img {...imgProps} />;
   },
