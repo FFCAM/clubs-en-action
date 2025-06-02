@@ -57,7 +57,15 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-      
+
+      - name: Start Next.js server
+        run: pnpm start &
+        env:
+          NODE_ENV: production
+
+      - name: Wait for Next.js to be ready
+        run: npx wait-on http://localhost:3000
+
       # Deployment to Cloudflare Pages has been disabled
       # - name: Build Preview
       #   id: preview-deployment

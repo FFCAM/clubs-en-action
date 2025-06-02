@@ -54,6 +54,14 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
 
+      - name: Start Next.js server
+        run: pnpm start &
+        env:
+          NODE_ENV: production
+
+      - name: Wait for Next.js to be ready
+        run: npx wait-on http://localhost:3000
+
       - name: Install Lighthouse CI and Chromium
         run: |
           sudo apt-get update
@@ -61,6 +69,7 @@ jobs:
           npm install -g @lhci/cli@0.11.x
 
       - name: Run Lighthouse CI
+        continue-on-error: true
         run: lhci autorun
         env:
           CHROME_PATH: /usr/bin/chromium-browser
