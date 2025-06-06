@@ -4,7 +4,8 @@
       "Bash(pnpm test:*)",
       "Bash(pnpm lint:*)",
       "Bash(pnpm add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }

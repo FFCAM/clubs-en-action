@@ -8,12 +8,12 @@ const faqs = [
   {
     question: "Quel est le rapport entre cette initiative et la fédération ?",
     answer:
-      "Cette initiative est complémentaire aux actions de la fédération. Il s'agit d'un réseau d'entraide direct entre clubs, sur des sujets opérationnels du quotidien. La fédération soutient cette démarche qui renforce les liens entre clubs et permet de partager les bonnes pratiques, tout en restant concentrée sur ses missions stratégiques. L'initiative \"les clubs en action\" permet simplement un partage d'expérience horizontal, sans nécessiter de mobiliser les ressources fédérales.",
+      "Cette initiative, portée par les bénévoles élus du comité directeur et des comités dans le cadre du programme \"Engagement Club Alpin\", vise à créer un réseau d'entraide direct entre clubs et comités sur les sujets opérationnels du quotidien. Elle complète les actions de la fédération, qui soutient pleinement cette démarche favorisant le partage d'expériences et de bonnes pratiques entre toutes les structures.",
   },
   {
     question: "Comment puis-je participer aux webinaires ?",
     answer:
-      "L'inscription aux webinaires est simple et gratuite. Il vous suffit de remplir le formulaire de contact en bas de page en précisant que vous souhaitez participer au prochain webinaire. Vous recevrez alors un lien de connexion quelques jours avant l'événement. Les webinaires sont ouverts à tous les bénévoles des clubs FFCAM.",
+      "Pour participer, il suffit de rejoindre le webinaire en utilisant le lien Zoom qui est indiqué dans les détails du webinaire. Les webinaires sont ouverts à tous les bénévoles des clubs et comités FFCAM.",
   },
   {
     question: "Puis-je proposer un thème ou partager mon expérience ?",
@@ -21,9 +21,9 @@ const faqs = [
       "Absolument ! Cette initiative vit grâce à vos contributions. Si vous avez développé une solution intéressante au sein de votre club ou si vous souhaitez proposer un thème qui vous tient à cœur, utilisez le formulaire de contact en précisant votre proposition. L'équipe d'animation prendra contact avec vous pour discuter des modalités.",
   },
   {
-    question: "Ces webinaires sont-ils accessibles à tous les clubs ?",
+    question: "Ces webinaires sont-ils accessibles à tous les clubs et comités ?",
     answer:
-      "Oui, ces webinaires sont accessibles à tous les clubs FFCAM sans exception. Que vous soyez un petit club rural ou une grande structure urbaine, l'objectif est justement de favoriser les échanges entre clubs de toutes tailles et de toutes régions. Cette diversité fait la richesse des échanges.",
+      "Oui, ces webinaires sont accessibles à tous les clubs et comités FFCAM sans exception. Que vous soyez un petit club rural, une grande structure urbaine ou un comité, l'objectif est de favoriser les échanges entre toutes les entités FFCAM, quelle que soit leur taille ou leur région. Cette diversité fait la richesse des échanges.",
   },
   {
     question:
@@ -47,7 +47,7 @@ export default function FAQSection() {
 
   return (
     <FFCAMSection id="faq" background="white">
-      <div className="mx-auto max-w-3xl text-center">
+      <div className="max-w-3xl mx-auto text-center">
         <FFCAMHeading level={2}>Questions fréquentes</FFCAMHeading>
         <p className="mt-6 text-lg leading-8 text-gray-600">
           Vous vous posez des questions sur cette initiative ? Retrouvez ici les
@@ -56,7 +56,7 @@ export default function FAQSection() {
         </p>
       </div>
 
-      <div className="mt-16 max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto mt-16">
         {faqs.map((faq, index) => (
           <div key={index} className="mb-4">
             <button
@@ -86,7 +86,7 @@ export default function FAQSection() {
                   : "max-h-0 opacity-0"
               }`}
             >
-              <div className="p-5 bg-gray-50 rounded-xl border border-gray-100">
+              <div className="p-5 border border-gray-100 bg-gray-50 rounded-xl">
                 <p className="text-gray-700">{faq.answer}</p>
               </div>
             </div>
