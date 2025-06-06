@@ -5,7 +5,10 @@
       "Bash(pnpm lint:*)",
       "Bash(pnpm add:*)",
       "Bash(git add:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(pnpm run:*)",
+      "Bash(pnpm:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }
