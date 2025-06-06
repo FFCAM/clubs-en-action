@@ -36,7 +36,7 @@ export default function WebinarsSection() {
     },
     {
       id: 2,
-      title: "Environnement : Comment tisser avec les associations environnementales et les gestionnaires d'espaces protégés",
+      title: "Environnement : Comment tisser des liens avec les associations environnementales locales et les gestionnaires d'espaces naturels protégés",
       date: "2025-06-30",
       time: "18:00",
       endTime: "19:30",

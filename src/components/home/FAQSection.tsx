@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "Quel est le rapport entre cette initiative et la fédération ?",
     answer:
-      "Cette initiative, portée par les bénévoles élus du comité directeur et des comités dans le cadre du programme \"Engagement Club Alpin\", vise à créer un réseau d'entraide direct entre clubs et comités sur les sujets opérationnels du quotidien. Elle complète les actions de la fédération, qui soutient pleinement cette démarche favorisant le partage d'expériences et de bonnes pratiques entre toutes les structures.",
+      "Cette initiative, portée par les bénévoles élus du comité directeur dans le cadre du programme \"Engagement Club Alpin\", vise à créer un réseau d'entraide direct sur les sujets opérationnels du quotidien. Elle complète les actions de la fédération, qui soutient pleinement cette démarche favorisant le partage d'expériences et de bonnes pratiques entre toutes les structures.",
   },
   {
     question: "Comment puis-je participer aux webinaires ?",
