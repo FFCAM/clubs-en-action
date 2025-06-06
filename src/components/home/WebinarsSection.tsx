@@ -1,10 +1,59 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, Star, UserPlus } from "lucide-react";
-import { FFCAMSection, FFCAMHeading, FFCAMSubheading, FFCAMCard, FFCAMBadge } from "@/components";
+import dynamic from "next/dynamic";
+import { Calendar, Star, UserPlus, Video } from "lucide-react";
+import { FFCAMSection, FFCAMHeading, FFCAMSubheading, FFCAMCard, FFCAMBadge, FFCAMButton } from "@/components";
+
+// Dynamic import pour éviter les erreurs d'hydratation
+const AddToCalendarButton = dynamic(
+  () => import("add-to-calendar-button-react").then((mod) => ({ default: mod.AddToCalendarButton })),
+  { 
+    ssr: false,
+    loading: () => (
+      <FFCAMButton 
+        variant="primary"
+        size="sm"
+        disabled
+        className="w-full justify-center"
+      >
+        Chargement...
+      </FFCAMButton>
+    )
+  }
+);
 
 export default function WebinarsSection() {
+  const nextWebinars = [
+    {
+      id: 1,
+      title: "Outils collaboratifs dans les Clubs",
+      date: "2025-06-23",
+      time: "20:00",
+      endTime: "21:30",
+      description: "Explorez les outils numériques qui facilitent la collaboration au sein de votre club : communication interne, gestion de projets, partage de documents, organisation d'événements. Des solutions concrètes présentées par des clubs qui les utilisent au quotidien.",
+      zoomLink: "https://us02web.zoom.us/j/82223666901"
+    },
+    {
+      id: 2,
+      title: "Environnement : Comment tisser avec les associations environnementales et les gestionnaires d'espaces protégés",
+      date: "2025-06-30",
+      time: "18:00",
+      endTime: "19:30",
+      description: "Découvrez comment développer des partenariats avec les associations environnementales et les gestionnaires d'espaces protégés pour enrichir vos activités tout en préservant la nature.",
+      zoomLink: null // Lien à venir
+    },
+    {
+      id: 3,
+      title: "La charte montagne",
+      date: null, // Date à définir
+      time: null,
+      endTime: null,
+      description: "Comprendre et appliquer la charte montagne dans vos activités de club. Échangez sur les bonnes pratiques, les défis rencontrés et les solutions trouvées pour concilier pratique sportive et respect de l'environnement montagnard.",
+      zoomLink: null // Lien à venir
+    }
+  ];
+
   const upcomingThemes = [
     "Suite d'outils collaboratifs",
     "Gestion des EPIs",
@@ -18,7 +67,7 @@ export default function WebinarsSection() {
 
   return (
     <FFCAMSection id="webinaires" background="light">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="max-w-2xl mx-auto text-center">
         <FFCAMHeading level={2}>
           Webinaires Participatifs
         </FFCAMHeading>
@@ -29,9 +78,109 @@ export default function WebinarsSection() {
         </p>
       </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-          <FFCAMCard className="group relative overflow-hidden p-8">
-            <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-ffcam/5 transition group-hover:scale-150" />
+        {/* Prochains webinaires */}
+        {nextWebinars.length > 0 && (
+          <div className="mt-16">
+            <div className="mb-8 text-center">
+              <FFCAMBadge className="inline-flex items-center px-3 py-1 mb-2">
+                <Calendar className="w-4 h-4 mr-1" /> Prochains webinaires
+              </FFCAMBadge>
+            </div>
+            <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+              {nextWebinars.map((webinar) => (
+                <FFCAMCard key={webinar.id} className="p-6">
+                  <div className="space-y-4">
+                    <FFCAMHeading level={3} className="text-xl">
+                      {webinar.title}
+                    </FFCAMHeading>
+                    <div className="flex flex-wrap items-center gap-4 text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-5 h-5 text-ffcam" />
+                        <span className="font-medium">
+                          {webinar.date ? (
+                            new Date(webinar.date).toLocaleDateString('fr-FR', { 
+                              weekday: 'long', 
+                              year: 'numeric', 
+                              month: 'long', 
+                              day: 'numeric' 
+                            })
+                          ) : (
+                            "Septembre 2025 (date à définir)"
+                          )}
+                        </span>
+                      </div>
+                      {webinar.time && (
+                        <div className="flex items-center gap-2">
+                          <Video className="w-5 h-5 text-ffcam" />
+                          <span className="font-medium">
+                            {webinar.time}{webinar.endTime ? `-${webinar.endTime}` : ''}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-gray-600">{webinar.description}</p>
+                    <div className="flex flex-col gap-3 pt-4">
+                      {webinar.date && webinar.time ? (
+                        <div className="w-full">
+                          <AddToCalendarButton
+                            name={webinar.title}
+                            language="fr"
+                            description={webinar.description + (webinar.zoomLink ? `\n\nLien Zoom: ${webinar.zoomLink}` : "\n\nLien Zoom à venir")}
+                            startDate={webinar.date}
+                            startTime={webinar.time}
+                            endTime={webinar.endTime || ""}
+                            timeZone="Europe/Paris"
+                            location="En ligne (Zoom)"
+                            options={['Apple','Google','Outlook.com','Yahoo','iCal']}
+                            label="Ajouter au calendrier"
+                            lightMode="light"
+                            size="4"
+                            buttonStyle="round"
+                            listStyle="modal"
+                          />
+                        </div>
+                      ) : (
+                        <FFCAMButton 
+                          variant="primary"
+                          size="sm"
+                          disabled
+                          className="justify-center w-full"
+                        >
+                          Date à venir
+                        </FFCAMButton>
+                      )}
+                      {webinar.zoomLink ? (
+                        <FFCAMButton
+                          variant="secondary"
+                          size="sm"
+                          icon={<Video className="w-4 h-4" />}
+                          onClick={() => window.open(webinar.zoomLink, '_blank')}
+                          className="justify-center w-full"
+                        >
+                          Rejoindre sur Zoom
+                        </FFCAMButton>
+                      ) : (
+                        <FFCAMButton
+                          variant="secondary"
+                          size="sm"
+                          disabled
+                          icon={<Video className="w-4 h-4" />}
+                          className="justify-center w-full"
+                        >
+                          Lien Zoom à venir
+                        </FFCAMButton>
+                      )}
+                    </div>
+                  </div>
+                </FFCAMCard>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 gap-8 mt-16 md:grid-cols-3">
+          <FFCAMCard className="relative p-8 overflow-hidden group">
+            <div className="absolute w-24 h-24 transition rounded-full -right-4 -top-4 bg-ffcam/5 group-hover:scale-150" />
             <FFCAMSubheading className="relative">
               Le Format
             </FFCAMSubheading>
@@ -43,8 +192,8 @@ export default function WebinarsSection() {
             </p>
           </FFCAMCard>
 
-          <FFCAMCard className="group relative overflow-hidden p-8">
-            <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-ffcam/5 transition group-hover:scale-150" />
+          <FFCAMCard className="relative p-8 overflow-hidden group">
+            <div className="absolute w-24 h-24 transition rounded-full -right-4 -top-4 bg-ffcam/5 group-hover:scale-150" />
             <FFCAMSubheading className="relative">
               L&apos;Organisation
             </FFCAMSubheading>
@@ -56,8 +205,8 @@ export default function WebinarsSection() {
             </p>
           </FFCAMCard>
 
-          <FFCAMCard className="group relative overflow-hidden p-8">
-            <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-ffcam/5 transition group-hover:scale-150" />
+          <FFCAMCard className="relative p-8 overflow-hidden group">
+            <div className="absolute w-24 h-24 transition rounded-full -right-4 -top-4 bg-ffcam/5 group-hover:scale-150" />
             <FFCAMSubheading className="relative">
               La Participation
             </FFCAMSubheading>
@@ -71,27 +220,27 @@ export default function WebinarsSection() {
         </div>
 
         <div className="mt-16">
-          <div className="text-center mb-8">
-            <FFCAMBadge className="inline-flex items-center mb-2 px-3 py-1">
-              <Star className="mr-1 h-4 w-4" /> Prochainement
+          <div className="mb-8 text-center">
+            <FFCAMBadge className="inline-flex items-center px-3 py-1 mb-2">
+              <Star className="w-4 h-4 mr-1" /> Prochainement
             </FFCAMBadge>
             <FFCAMHeading level={3} className="mt-2">
               Thèmes envisagés
             </FFCAMHeading>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {upcomingThemes.map((theme) => (
               <Link
                 key={theme}
                 href="#contact"
-                className="group flex items-center gap-4 rounded-xl bg-white p-6 shadow-sm transition border-2 border-ffcam/20 hover:border-ffcam hover:shadow-lg hover:bg-ffcam/5"
+                className="flex items-center gap-4 p-6 transition bg-white border-2 shadow-sm group rounded-xl border-ffcam/20 hover:border-ffcam hover:shadow-lg hover:bg-ffcam/5"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-ffcam/10 text-ffcam group-hover:bg-ffcam group-hover:text-white transition">
+                <div className="flex items-center justify-center w-12 h-12 transition rounded-lg shrink-0 bg-ffcam/10 text-ffcam group-hover:bg-ffcam group-hover:text-white">
                   {theme === "Proposez vos thèmes" ? (
-                    <UserPlus className="h-6 w-6" />
+                    <UserPlus className="w-6 h-6" />
                   ) : (
-                    <Calendar className="h-6 w-6" />
+                    <Calendar className="w-6 h-6" />
                   )}
                 </div>
                 <p className="font-medium text-gray-900 group-hover:text-ffcam-dark">{theme}</p>
