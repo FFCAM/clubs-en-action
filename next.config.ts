@@ -40,7 +40,7 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudflare.com scripts.simpleanalyticscdn.com; connect-src 'self' *.resend.com *.cloudflare.com queue.simpleanalyticscdn.com; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-ancestors 'self'; form-action 'self';",
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudflare.com scripts.simpleanalyticscdn.com; connect-src 'self' *.resend.com *.cloudflare.com queue.simpleanalyticscdn.com; img-src 'self' data: blob: queue.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-ancestors 'self'; form-action 'self';",
   }
 ];
 
