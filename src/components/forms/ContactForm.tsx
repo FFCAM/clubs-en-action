@@ -150,6 +150,7 @@ export default function ContactForm() {
       // Stocker le message de succès personnalisé
       setSuccessMessage(data.message || 'Merci pour votre contribution ! Nous vous recontacterons bientôt.');
       setSubmitStatus('success');
+      
       form.reset();
       setSuggestTheme(false);
       setShareSolution(false);
@@ -158,7 +159,8 @@ export default function ContactForm() {
       fetchCsrfToken();
     } catch (error) {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Une erreur inattendue est survenue. Veuillez réessayer.');
+      const errorMsg = error instanceof Error ? error.message : 'Une erreur inattendue est survenue. Veuillez réessayer.';
+      setErrorMessage(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -198,7 +200,7 @@ export default function ContactForm() {
           </div>
         </div>
         
-        <div className="mt-6 rounded-2xl bg-white p-8 shadow-lg">
+        <div className="mt-6 rounded-2xl bg-white p-4 shadow-lg sm:p-6 lg:p-8">
           {submitStatus === 'success' ? (
             <div className="rounded-lg bg-green-50 p-4 border border-green-200" role="alert" aria-live="polite">
               <div className="flex items-start">
@@ -220,7 +222,7 @@ export default function ContactForm() {
             </div>
           ) : (
             <form 
-              className="space-y-6" 
+              className="space-y-4 sm:space-y-6" 
               onSubmit={handleSubmit}
               aria-describedby={submitStatus === 'error' ? 'form-error' : undefined}
               noValidate
@@ -246,7 +248,7 @@ export default function ContactForm() {
                   </div>
                 </div>
               )}
-              <div className="grid gap-6 sm:grid-cols-2">
+              <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
                 <div>
                   <label htmlFor={nameId} className="block text-sm font-medium text-gray-700">
                     Nom

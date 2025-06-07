@@ -99,17 +99,17 @@ export default function WebinarsSection() {
                 <Calendar className="w-4 h-4 mr-1" /> Prochains webinaires
               </FFCAMBadge>
             </div>
-            <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+            <div className="grid grid-cols-1 gap-4 mx-auto sm:gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
               {nextWebinars.map((webinar) => (
-                <FFCAMCard key={webinar.id} className="p-6">
-                  <div className="space-y-4">
-                    <FFCAMHeading level={3} className="text-xl">
+                <FFCAMCard key={webinar.id} className="p-4 sm:p-6">
+                  <div className="space-y-3 sm:space-y-4">
+                    <FFCAMHeading level={3} className="text-lg sm:text-xl">
                       {webinar.title}
                     </FFCAMHeading>
-                    <div className="flex flex-wrap items-center gap-4 text-gray-600">
+                    <div className="flex flex-col gap-2 text-gray-600 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                       <div className="flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-ffcam" />
-                        <span className="font-medium">
+                        <Calendar className="w-4 h-4 text-ffcam sm:w-5 sm:h-5" />
+                        <span className="text-sm font-medium sm:text-base">
                           {webinar.date ? (
                             new Date(webinar.date).toLocaleDateString('fr-FR', { 
                               weekday: 'long', 
@@ -124,15 +124,15 @@ export default function WebinarsSection() {
                       </div>
                       {webinar.time && (
                         <div className="flex items-center gap-2">
-                          <Video className="w-5 h-5 text-ffcam" />
-                          <span className="font-medium">
+                          <Video className="w-4 h-4 text-ffcam sm:w-5 sm:h-5" />
+                          <span className="text-sm font-medium sm:text-base">
                             {webinar.time}{webinar.endTime ? `-${webinar.endTime}` : ''}
                           </span>
                         </div>
                       )}
                     </div>
-                    <p className="text-gray-600">{webinar.description}</p>
-                    <div className="flex flex-col gap-3 pt-4">
+                    <p className="text-sm text-gray-600 sm:text-base">{webinar.description}</p>
+                    <div className="flex flex-col gap-2 pt-3 sm:gap-3 sm:pt-4">
                       {webinar.date && webinar.time ? (
                         <div className="w-full">
                           <AddToCalendarButton
@@ -157,7 +157,7 @@ export default function WebinarsSection() {
                           variant="primary"
                           size="sm"
                           disabled
-                          className="justify-center w-full"
+                          className="justify-center w-full text-sm"
                         >
                           Date à venir
                         </FFCAMButton>
@@ -169,7 +169,7 @@ export default function WebinarsSection() {
                             size="sm"
                             icon={<Video className="w-4 h-4" />}
                             onClick={() => window.open(webinar.zoomLink, '_blank')}
-                            className="justify-center w-full"
+                            className="justify-center w-full text-sm"
                           >
                             Rejoindre sur Zoom
                           </FFCAMButton>
@@ -178,7 +178,7 @@ export default function WebinarsSection() {
                             size="sm"
                             icon={copiedId === webinar.id ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                             onClick={() => copyToClipboard(webinar.zoomLink!, webinar.id)}
-                            className="justify-center w-full"
+                            className="justify-center w-full text-sm"
                           >
                             {copiedId === webinar.id ? "Lien copié !" : "Copier le lien"}
                           </FFCAMButton>
@@ -189,7 +189,7 @@ export default function WebinarsSection() {
                           size="sm"
                           disabled
                           icon={<Video className="w-4 h-4" />}
-                          className="justify-center w-full"
+                          className="justify-center w-full text-sm"
                         >
                           Lien Zoom à venir
                         </FFCAMButton>
@@ -261,21 +261,21 @@ export default function WebinarsSection() {
             </FFCAMHeading>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
             {upcomingThemes.map((theme) => (
               <Link
                 key={theme}
                 href="#contact"
-                className="flex items-center gap-4 p-6 transition bg-white border-2 shadow-sm group rounded-xl border-ffcam/20 hover:border-ffcam hover:shadow-lg hover:bg-ffcam/5"
+                className="flex items-center gap-3 p-4 transition bg-white border-2 shadow-sm group rounded-xl border-ffcam/20 hover:border-ffcam hover:shadow-lg hover:bg-ffcam/5 sm:gap-4 sm:p-5 lg:p-6"
               >
-                <div className="flex items-center justify-center w-12 h-12 transition rounded-lg shrink-0 bg-ffcam/10 text-ffcam group-hover:bg-ffcam group-hover:text-white">
+                <div className="flex items-center justify-center w-10 h-10 transition rounded-lg shrink-0 bg-ffcam/10 text-ffcam group-hover:bg-ffcam group-hover:text-white sm:w-12 sm:h-12">
                   {theme === "Proposez vos thèmes" ? (
-                    <UserPlus className="w-6 h-6" />
+                    <UserPlus className="w-5 h-5 sm:w-6 sm:h-6" />
                   ) : (
-                    <Calendar className="w-6 h-6" />
+                    <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
                   )}
                 </div>
-                <p className="font-medium text-gray-900 group-hover:text-ffcam-dark">{theme}</p>
+                <p className="text-sm font-medium text-gray-900 group-hover:text-ffcam-dark sm:text-base">{theme}</p>
               </Link>
             ))}
           </div>
