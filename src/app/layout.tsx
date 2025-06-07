@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Poppins } from 'next/font/google';
+import Script from 'next/script';
 
 /* Charge Poppins, hébergée localement par Next, et expose la CSS var */
 const poppins = Poppins({
@@ -78,7 +79,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0073CF" />
         <meta name="color-scheme" content="light" />
       </head>
-      <body className="min-h-screen bg-white font-sans antialiased selection:bg-ffcam selection:text-white">
+      <body className="min-h-screen font-sans antialiased bg-white selection:bg-ffcam selection:text-white">
         <a href="#main-content" className="skip-to-content">
           Aller au contenu principal
         </a>
@@ -86,7 +87,7 @@ export default function RootLayout({
           {children}
         </div>
         {/* 100% privacy-first analytics */}
-        <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+        <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
       </body>
     </html>
   );
