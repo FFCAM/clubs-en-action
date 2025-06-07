@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Calendar, Star, UserPlus, Video } from "lucide-react";
+import { useState } from "react";
+import { Calendar, Star, UserPlus, Video, Copy, Check } from "lucide-react";
 import { FFCAMSection, FFCAMHeading, FFCAMSubheading, FFCAMCard, FFCAMBadge, FFCAMButton } from "@/components";
 
 // Dynamic import pour éviter les erreurs d'hydratation
@@ -24,6 +25,18 @@ const AddToCalendarButton = dynamic(
 );
 
 export default function WebinarsSection() {
+  const [copiedId, setCopiedId] = useState<number | null>(null);
+
+  const copyToClipboard = async (text: string, webinarId: number) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(webinarId);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error('Erreur lors de la copie:', err);
+    }
+  };
+
   const nextWebinars = [
     {
       id: 1,
@@ -150,15 +163,26 @@ export default function WebinarsSection() {
                         </FFCAMButton>
                       )}
                       {webinar.zoomLink ? (
-                        <FFCAMButton
-                          variant="secondary"
-                          size="sm"
-                          icon={<Video className="w-4 h-4" />}
-                          onClick={() => window.open(webinar.zoomLink, '_blank')}
-                          className="justify-center w-full"
-                        >
-                          Rejoindre sur Zoom
-                        </FFCAMButton>
+                        <>
+                          <FFCAMButton
+                            variant="secondary"
+                            size="sm"
+                            icon={<Video className="w-4 h-4" />}
+                            onClick={() => window.open(webinar.zoomLink, '_blank')}
+                            className="justify-center w-full"
+                          >
+                            Rejoindre sur Zoom
+                          </FFCAMButton>
+                          <FFCAMButton
+                            variant="secondary"
+                            size="sm"
+                            icon={copiedId === webinar.id ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            onClick={() => copyToClipboard(webinar.zoomLink!, webinar.id)}
+                            className="justify-center w-full"
+                          >
+                            {copiedId === webinar.id ? "Lien copié !" : "Copier le lien"}
+                          </FFCAMButton>
+                        </>
                       ) : (
                         <FFCAMButton
                           variant="secondary"
@@ -178,7 +202,15 @@ export default function WebinarsSection() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-8 mt-16 md:grid-cols-3">
+        <div className="mt-16">
+          <div className="mb-8 text-center">
+            <FFCAMBadge className="inline-flex items-center px-3 py-1 mb-2">
+              <Video className="w-4 h-4 mr-1" /> Comment ça marche ?
+            </FFCAMBadge>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <FFCAMCard className="relative p-8 overflow-hidden group">
             <div className="absolute w-24 h-24 transition rounded-full -right-4 -top-4 bg-ffcam/5 group-hover:scale-150" />
             <FFCAMSubheading className="relative">
