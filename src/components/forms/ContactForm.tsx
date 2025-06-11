@@ -83,7 +83,7 @@ export default function ContactForm() {
 
     try {
       // Gestion des checkboxes
-      const checkboxes = ['suggest-theme', 'share-solution', 'participate', 'feedback', 'newsletter', 'help-organize'];
+      const checkboxes = ['suggest-theme', 'share-solution', 'participate', 'feedback', 'help-organize'];
       checkboxes.forEach(field => {
         const value = formData.get(field);
         if (value === 'on') {
@@ -417,18 +417,6 @@ export default function ContactForm() {
                   className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm focus:border-ffcam focus:outline-none focus:ring-2 focus:ring-ffcam disabled:bg-gray-50 disabled:text-gray-500 text-gray-900"
                   aria-required="true"
                 ></textarea>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="newsletter"
-                  name="newsletter"
-                  disabled={isSubmitting}
-                  className="h-4 w-4 rounded border-gray-300 text-ffcam focus:ring-ffcam focus:ring-offset-2 disabled:bg-gray-50"
-                />
-                <label htmlFor="newsletter" className="ml-2 block text-sm text-gray-700">
-                  Je souhaite recevoir les actualités de Clubs en Action
-                </label>
               </div>
               {/* Token CSRF caché */}
 
