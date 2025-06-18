@@ -16,7 +16,7 @@ const AddToCalendarButton = dynamic(
         variant="primary"
         size="sm"
         disabled
-        className="w-full justify-center"
+        className="justify-center w-full"
       >
         Chargement...
       </FFCAMButton>
@@ -54,7 +54,7 @@ export default function WebinarsSection() {
       time: "18:00",
       endTime: "19:30",
       description: "Découvrez comment développer des partenariats avec les associations environnementales et les gestionnaires d'espaces protégés pour enrichir vos activités tout en préservant la nature.",
-      zoomLink: null // Lien à venir
+      zoomLink: "https://us02web.zoom.us/j/87499337802"
     },
     {
       id: 3,
