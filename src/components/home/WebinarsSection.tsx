@@ -37,16 +37,19 @@ export default function WebinarsSection() {
     }
   };
 
-  const nextWebinars = [
+  const pastWebinars = [
     {
       id: 1,
       title: "Outils collaboratifs dans les Clubs",
       date: "2025-06-23",
       time: "20:00",
       endTime: "21:30",
-      description: "Explorez les outils numériques qui facilitent la collaboration au sein de votre club : communication interne, gestion de projets, partage de documents, organisation d'événements. Des solutions concrètes présentées par des clubs qui les utilisent au quotidien.",
-      zoomLink: "https://us02web.zoom.us/j/82223666901"
-    },
+      description: "Exploration des outils numériques qui facilitent la collaboration au sein de votre club : communication interne, gestion de projets, partage de documents, organisation d'événements. Des solutions concrètes présentées par des clubs qui les utilisent au quotidien.",
+      recordingLink: "/webinars/outils-collaboratifs"
+    }
+  ];
+
+  const nextWebinars = [
     {
       id: 2,
       title: "Environnement : Comment tisser des liens avec les associations environnementales locales et les gestionnaires d'espaces naturels protégés",
@@ -59,10 +62,20 @@ export default function WebinarsSection() {
     {
       id: 3,
       title: "La charte montagne",
-      date: null, // Date à définir
+      date: null, // Septembre 2025
       time: null,
       endTime: null,
       description: "Comprendre et appliquer la charte montagne dans vos activités de club. Échangez sur les bonnes pratiques, les défis rencontrés et les solutions trouvées pour concilier pratique sportive et respect de l'environnement montagnard.",
+      zoomLink: null // Lien à venir
+    },
+    {
+      id: 4,
+      title: "Thème choisi par les clubs",
+      date: null, // Octobre 2025
+      time: null,
+      endTime: null,
+      description: "Un webinaire dont le thème sera déterminé par les clubs eux-mêmes ! Nous recueillerons vos propositions et votes pour aborder le sujet qui vous intéresse le plus. Une approche 100% participative.",
+      hasProposalForm: true,
       zoomLink: null // Lien à venir
     }
   ];
@@ -117,8 +130,12 @@ export default function WebinarsSection() {
                               month: 'long', 
                               day: 'numeric' 
                             })
-                          ) : (
+                          ) : webinar.id === 3 ? (
                             "Septembre 2025 (date à définir)"
+                          ) : webinar.id === 4 ? (
+                            "Octobre 2025 (date à définir)"
+                          ) : (
+                            "Date à définir"
                           )}
                         </span>
                       </div>
@@ -194,6 +211,66 @@ export default function WebinarsSection() {
                           Lien Zoom à venir
                         </FFCAMButton>
                       )}
+                      {webinar.hasProposalForm && (
+                        <Link href="#contact">
+                          <FFCAMButton
+                            variant="outline"
+                            size="sm"
+                            icon={<UserPlus className="w-4 h-4" />}
+                            className="justify-center w-full text-sm"
+                          >
+                            Proposer un thème
+                          </FFCAMButton>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </FFCAMCard>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Webinaires passés */}
+        {pastWebinars.length > 0 && (
+          <div className="mt-16">
+            <div className="mb-8 text-center">
+              <FFCAMBadge className="inline-flex items-center px-3 py-1 mb-2">
+                <Check className="w-4 h-4 mr-1" /> Webinaires passés
+              </FFCAMBadge>
+            </div>
+            <div className="grid grid-cols-1 gap-4 mx-auto sm:gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+              {pastWebinars.map((webinar) => (
+                <FFCAMCard key={webinar.id} className="p-4 sm:p-6">
+                  <div className="space-y-3 sm:space-y-4">
+                    <FFCAMHeading level={3} className="text-lg sm:text-xl">
+                      {webinar.title}
+                    </FFCAMHeading>
+                    <div className="flex flex-col gap-2 text-gray-600 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-ffcam sm:w-5 sm:h-5" />
+                        <span className="text-sm font-medium sm:text-base">
+                          {new Date(webinar.date).toLocaleDateString('fr-FR', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 sm:text-base">{webinar.description}</p>
+                    <div className="flex flex-col gap-2 pt-3 sm:gap-3 sm:pt-4">
+                      <Link href={webinar.recordingLink}>
+                        <FFCAMButton
+                          variant="primary"
+                          size="sm"
+                          icon={<Video className="w-4 h-4" />}
+                          className="justify-center w-full text-sm"
+                        >
+                          Voir la présentation
+                        </FFCAMButton>
+                      </Link>
                     </div>
                   </div>
                 </FFCAMCard>

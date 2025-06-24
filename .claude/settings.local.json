@@ -10,7 +10,8 @@
       "Bash(pnpm:*)",
       "Bash(cat:*)",
       "Bash(find:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

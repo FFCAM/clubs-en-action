@@ -2,9 +2,10 @@
 
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Info } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { useState } from "react";
 
 // Button Types
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -173,7 +174,7 @@ export function FFCAMSection({
   
   return (
     <section className={classes} id={id}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         {children}
       </div>
     </section>
@@ -312,8 +313,52 @@ export function FFCAMArrowLink({
   return (
     <Link href={href} className={classes} {...externalProps}>
       {children}
-      <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
+      <ArrowRight className="ml-1 w-4 h-4" aria-hidden="true" />
       {external && <span className="sr-only">(S'ouvre dans un nouvel onglet)</span>}
     </Link>
   );
 }
+
+export const FFCAMVisioBanner = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const handleClose = () => setIsVisible(false);
+
+  const zoomLink = "https://us02web.zoom.us/j/82223666901";
+
+  if (!isVisible) return null;
+
+  return (
+    <div
+      className="flex fixed top-0 left-0 z-50 flex-wrap gap-3 justify-center items-center px-4 py-2 w-full text-black bg-yellow-300 shadow-md"
+      role="alert"
+      aria-label="Annonce visio"
+      tabIndex={-1}
+    >
+      <div className="flex items-center">
+        <Info className="mr-2 w-5 h-5" aria-hidden="true" />
+        <span className="text-base font-semibold sm:text-lg">
+          Le code de connexion pour la visio du 23 juin est : <span className="font-bold">152671</span>
+        </span>
+      </div>
+
+      <FFCAMButton
+        variant="primary"
+        size="sm"
+        onClick={() => window.open(zoomLink, '_blank')}
+        className="text-white bg-ffcam-dark hover:bg-ffcam-dark/90"
+        aria-label="Rejoindre la visioconférence sur Zoom"
+      >
+        Rejoindre la visio
+      </FFCAMButton>
+      
+      <button
+        onClick={handleClose}
+        aria-label="Fermer la bannière d'information visio"
+        className="absolute right-2 top-1/2 p-1 rounded-full -translate-y-1/2 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-black"
+        tabIndex={0}
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+  );
+};
