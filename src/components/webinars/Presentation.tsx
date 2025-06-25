@@ -255,19 +255,19 @@ const slides = [
   },
   {
     id: 6,
-    title: "Cas Pratique: Le Club Moyen",
+    title: "Cas Pratique: Moyens et Gros Clubs",
     content: (
       <div className="grid grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="flex items-center mb-4 text-2xl font-semibold text-blue-600">
-              🏔️ Club Alpin de Valmont
+              🏔️ Clubs Alpins Moyens & Gros
             </h3>
             <div className="space-y-3 text-gray-700">
-              <div className="flex items-center">👥 400 adhérents</div>
-              <div className="flex items-center">💼 8 bénévoles au bureau</div>
-              <div className="flex items-center">🥾 4 sections d'activités</div>
-              <div className="flex items-center">📅 50+ sorties par an</div>
+              <div className="flex items-center">👥 400 à 2000+ adhérents</div>
+              <div className="flex items-center">💼 8 à 25 bénévoles au bureau</div>
+              <div className="flex items-center">🥾 4 à 12 sections d'activités</div>
+              <div className="flex items-center">🏢 Locaux multiples + équipements</div>
             </div>
           </div>
           
@@ -277,75 +277,6 @@ const slides = [
               <li>• Coordination entre sections</li>
               <li>• Gestion documentaire structurée</li>
               <li>• Communication professionnelle</li>
-              <li>• Partage de fichiers volumineux</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="space-y-6">
-          <h4 className="mb-4 text-xl font-semibold text-gray-800">Solutions Structurées</h4>
-          
-          <div className="p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-            <div className="flex items-center mb-3">
-              <span className="mr-3 text-2xl">🔍</span>
-              <h5 className="text-lg font-semibold text-blue-800">Google Workspace for Nonprofits</h5>
-            </div>
-            <div className="space-y-2 text-sm text-gray-700">
-              <div>• <strong>Gmail professionnel</strong> : Adresses @nomduclub.fr</div>
-              <div>• <strong>Drive partagé</strong> : Espaces par section</div>
-              <div>• <strong>Google Meet</strong> : Réunions en ligne</div>
-              <div>• <strong>Docs/Sheets/Slides</strong> : Collaboration en temps réel</div>
-            </div>
-            <div className="mt-3 text-xs text-blue-600">✓ Intégré • ✓ Versions gratuites pour associations</div>
-          </div>
-          
-          <div className="p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
-            <div className="flex items-center mb-3">
-              <span className="mr-3 text-2xl">Ⓜ️</span>
-              <h5 className="text-lg font-semibold text-green-800">Microsoft 365</h5>
-            </div>
-            <div className="space-y-2 text-sm text-gray-700">
-              <div>• <strong>Outlook</strong> : Email professionnel</div>
-              <div>• <strong>OneDrive</strong> : Stockage cloud</div>
-              <div>• <strong>Teams</strong> : Communication d'équipe</div>
-              <div>• <strong>Word/Excel/PowerPoint</strong> : Suite bureautique</div>
-            </div>
-            <div className="mt-3 text-xs text-green-600">✓ Familier • ✓ Versions gratuites pour associations</div>
-          </div>
-          
-          <div className="p-4 text-center bg-gray-100 rounded-lg">
-            <p className="text-sm font-medium text-gray-700">
-              💰 Coût : 0€ (versions gratuites pour associations) à 5€/utilisateur/mois
-            </p>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 7,
-    title: "Cas Pratique: Le Grand Club",
-    content: (
-      <div className="grid grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <div className="p-6 bg-white rounded-lg shadow-lg">
-            <h3 className="flex items-center mb-4 text-2xl font-semibold text-blue-600">
-              🏔️ Club Alpin de Métropole
-            </h3>
-            <div className="space-y-3 text-gray-700">
-              <div className="flex items-center">👥 2000+ adhérents</div>
-              <div className="flex items-center">💼 25 bénévoles au bureau</div>
-              <div className="flex items-center">🥾 12 sections spécialisées</div>
-              <div className="flex items-center">🏢 Refuge + local + mur d'escalade</div>
-            </div>
-          </div>
-          
-          <div className="p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
-            <h4 className="mb-3 text-lg font-semibold text-red-800">Défis de Gestion</h4>
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li>• Coordination multi-niveaux</li>
-              <li>• Gestion documentaire complexe</li>
-              <li>• Communication institutionnelle</li>
               <li>• Archivage et historique</li>
               <li>• Sécurité des données</li>
             </ul>
@@ -353,39 +284,55 @@ const slides = [
         </div>
         
         <div className="space-y-6">
-          <h4 className="mb-4 text-xl font-semibold text-gray-800">Solutions Avancées</h4>
+          <h4 className="mb-4 text-xl font-semibold text-gray-800">Solutions Structurées</h4>
           
-          <div className="p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-            <div className="flex items-center mb-3">
-              <span className="mr-3 text-2xl">🔍</span>
-              <h5 className="text-lg font-semibold text-blue-800">Google Workspace for Nonprofits</h5>
+          <div className="space-y-4">
+            <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+              <div className="flex items-center mb-2">
+                <span className="mr-3 text-xl">🔍</span>
+                <h5 className="text-lg font-semibold text-blue-800">Google Workspace for Nonprofits</h5>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                <div>• Gmail professionnel</div>
+                <div>• Drive partagé</div>
+                <div>• Google Meet</div>
+                <div>• Stockage illimité (gros clubs)</div>
+              </div>
+              <div className="mt-2 text-xs text-blue-600">✓ Gratuit pour les associations • ✓ Sécurisé</div>
             </div>
-            <div className="space-y-2 text-sm text-gray-700">
-              <div>• <strong>Stockage illimité</strong> : Drive sans limite</div>
-              <div>• <strong>Sécurité avancée</strong> : Contrôles d'accès</div>
-              <div>• <strong>Archivage</strong> : Google Vault</div>
-              <div>• <strong>Sites web</strong> : Google Sites pour le club</div>
+            
+            <div className="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+              <div className="flex items-center mb-2">
+                <span className="mr-3 text-xl">Ⓜ️</span>
+                <h5 className="text-lg font-semibold text-green-800">Microsoft 365</h5>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                <div>• Outlook</div>
+                <div>• Teams</div>
+                <div>• SharePoint (gros clubs)</div>
+                <div>• Power Platform</div>
+              </div>
+              <div className="mt-2 text-xs text-green-600">✓ Complet • ✓ Versions gratuites</div>
             </div>
-            <div className="mt-3 text-xs text-blue-600">✓ Gratuit pour les associations • ✓ Sécurisé • ✓ Scalable • ✓ Support dédié</div>
-          </div>
-          
-          <div className="p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
-            <div className="flex items-center mb-3">
-              <span className="mr-3 text-2xl">Ⓜ️</span>
-              <h5 className="text-lg font-semibold text-green-800">Microsoft 365 Entreprise</h5>
+            
+            <div className="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+              <div className="flex items-center mb-2">
+                <span className="mr-3 text-xl">☁️</span>
+                <h5 className="text-lg font-semibold text-purple-800">Nextcloud</h5>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                <div>• Stockage privé</div>
+                <div>• Collaboration</div>
+                <div>• Talk (visio)</div>
+                <div>• Contrôle total</div>
+              </div>
+              <div className="mt-2 text-xs text-purple-600">✓ Open source • ✓ Auto-hébergé • ✓ Extensible (plugins)</div>
             </div>
-            <div className="space-y-2 text-sm text-gray-700">
-              <div>• <strong>SharePoint</strong> : Intranet du club</div>
-              <div>• <strong>Exchange</strong> : Email professionnel</div>
-              <div>• <strong>Power Platform</strong> : Automatisations simples</div>
-              <div>• <strong>Sécurité</strong> : Contrôles avancés</div>
-            </div>
-            <div className="mt-3 text-xs text-green-600">✓ Complet • ✓ Intégré • ✓ Conformité • ✓ Versions gratuites pour associations</div>
           </div>
           
           <div className="p-4 text-center bg-gray-100 rounded-lg">
             <p className="text-sm font-medium text-gray-700">
-              💰 Coût : 0€ (versions gratuites pour associations) à 10-20€/utilisateur/mois selon les fonctionnalités
+              💰 Coût : 0€ (versions gratuites pour associations) à 5-20€/utilisateur/mois
             </p>
           </div>
         </div>

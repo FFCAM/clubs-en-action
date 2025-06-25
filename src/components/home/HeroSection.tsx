@@ -82,10 +82,6 @@ export default function HeroSection() {
               </div>
               <div className="space-y-2 text-xs text-white sm:text-sm">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                  <span className="font-medium">23 juin • 20h-21h30 :</span>
-                  <span>Outils collaboratifs dans les Clubs</span>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
                   <span className="font-medium">30 juin • 18h-19h30 :</span>
                   <span>Environnement et partenariats</span>
                 </div>
