@@ -268,7 +268,7 @@ export default function WebinarsSection() {
                           icon={<Video className="w-4 h-4" />}
                           className="justify-center w-full text-sm"
                         >
-                          Voir la présentation
+                          Voir le compte-rendu
                         </FFCAMButton>
                       </Link>
                     </div>
