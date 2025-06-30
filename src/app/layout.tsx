@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
+import { FFCAMVisioBanner } from '@/components/ui/FFCAMComponents';
 
 /* Charge Poppins, hébergée localement par Next, et expose la CSS var */
 const poppins = Poppins({
@@ -80,6 +81,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="light" />
       </head>
       <body className="min-h-screen font-sans antialiased bg-white selection:bg-ffcam selection:text-white">
+        <FFCAMVisioBanner />
         <a href="#main-content" className="skip-to-content">
           Aller au contenu principal
         </a>

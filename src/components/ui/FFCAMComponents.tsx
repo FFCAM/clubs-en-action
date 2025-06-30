@@ -322,8 +322,20 @@ export function FFCAMArrowLink({
 export const FFCAMVisioBanner = () => {
   const [isVisible, setIsVisible] = useState(true);
   const handleClose = () => setIsVisible(false);
+  const [copied, setCopied] = useState(false);
 
   const zoomLink = "https://us02web.zoom.us/j/82223666901";
+  const secretCode = "012383";
+
+  const handleCopyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(secretCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code:', err);
+    }
+  };
 
   if (!isVisible) return null;
 
@@ -334,11 +346,27 @@ export const FFCAMVisioBanner = () => {
       aria-label="Annonce visio"
       tabIndex={-1}
     >
-      <div className="flex items-center">
+      <div className="flex items-center gap-3">
         <Info className="mr-2 w-5 h-5" aria-hidden="true" />
         <span className="text-base font-semibold sm:text-lg">
-          Le code de connexion pour la visio du 23 juin est : <span className="font-bold">152671</span>
+          Le code de connexion pour la visio du 30 juin est : <span className="font-bold">{secretCode}</span>
         </span>
+        <button
+          onClick={handleCopyCode}
+          className="p-1 text-black/70 hover:text-black hover:bg-yellow-400 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-1"
+          aria-label="Copier le code secret"
+          title={copied ? "Copié !" : "Copier le code"}
+        >
+          {copied ? (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          )}
+        </button>
       </div>
 
       <FFCAMButton
