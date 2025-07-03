@@ -33,9 +33,9 @@ export default function HeroSection() {
               Chaque jour, les clubs FFCAM font face à des défis similaires et
               disposent d&apos;une riche expérience à partager. Notre initiative
               : créer des espaces d&apos;échange directs entre clubs, où vous
-              partagez vos solutions concrètes sur des sujets du quotidien
-              (vie associative, environnement, outils numériques, ...), dans un esprit de
-              collaboration et d&apos;entraide mutuelle.
+              partagez vos solutions concrètes sur des sujets du quotidien 
+              (vie associative, environnement, outils numériques, bénévolat, ...), 
+              dans un esprit de collaboration et d&apos;entraide mutuelle.
             </p>
 
             <div className="flex flex-col gap-3 mt-6 sm:flex-row sm:gap-4 sm:mt-8 md:mt-10">

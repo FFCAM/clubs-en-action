@@ -21,9 +21,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://clubs-en-action.ffcam.fr'),
-  title: 'Clubs en Action | FFCAM',
-  description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne',
-  keywords: ['FFCAM', 'clubs', 'montagne', 'alpinisme', 'webinaires', 'partage', 'clubs alpins'],
+  title: 'Comment gérer un club FFCAM | Solutions et outils pratiques',
+  description: 'Solutions pour gérer votre club de montagne : outils numériques, recrutement bénévoles, organisation événements. Webinaires et retours d\'expérience de clubs FFCAM.',
+  keywords: ['FFCAM', 'clubs ffcam', 'gestion club montagne', 'outils collaboratifs clubs sportifs', 'webinaires clubs alpins', 'entraide clubs montagne', 'solutions clubs ffcam', 'clubs alpins français', 'vie associative', 'bénévoles club alpin'],
   authors: [{ name: 'Fédération française des clubs alpins et de montagne' }],
   icons: {
     icon: '/favicon.png',
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://clubs-en-action.ffcam.fr',
-    title: 'Clubs en Action | FFCAM',
-    description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne - Plateforme collaborative pour le partage de bonnes pratiques entre clubs',
+    title: 'Clubs en Action | Solutions et entraide pour clubs FFCAM',
+    description: 'Découvrez comment gérer votre club de montagne : outils collaboratifs, webinaires pratiques, solutions concrètes partagées entre clubs FFCAM. Rejoignez notre communauté d\'entraide.',
     siteName: 'Clubs en Action FFCAM',
     images: [
       {
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Clubs en Action | FFCAM',
-    description: 'Partageons les solutions des clubs de la Fédération française des clubs alpins et de montagne - Plateforme collaborative',
+    title: 'Clubs en Action | Solutions et entraide pour clubs FFCAM',
+    description: 'Webinaires, outils collaboratifs et solutions pour gérer votre club de montagne. Rejoignez la communauté d\'entraide des clubs FFCAM.',
     images: ['/og-image.png'],
     creator: '@FFCAM_fr',
   },
@@ -78,6 +78,40 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#0073CF" />
         <meta name="color-scheme" content="light" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Clubs en Action FFCAM",
+              "alternateName": "Plateforme collaborative clubs FFCAM",
+              "url": "https://clubs-en-action.ffcam.fr",
+              "logo": "https://clubs-en-action.ffcam.fr/images/Logo-FFCAM.png",
+              "description": "Solutions pour gérer un club de montagne FFCAM : outils collaboratifs, logiciels de gestion, recrutement bénévoles, organisation événements. Webinaires et retours d'expérience.",
+              "parentOrganization": {
+                "@type": "Organization",
+                "name": "Fédération française des clubs alpins et de montagne",
+                "url": "https://www.ffcam.fr"
+              },
+              "knowsAbout": [
+                "gestion club montagne",
+                "outils collaboratifs clubs sportifs",
+                "recrutement bénévoles club alpin",
+                "organisation événements club FFCAM",
+                "communication interne association sportive",
+                "logiciel gestion club"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "name": "Webinaires gratuits gestion club FFCAM",
+                "description": "Sessions d'échange trimestrielles sur la gestion de club : outils numériques, bénévoles, événements",
+                "price": "0",
+                "priceCurrency": "EUR"
+              }
+            })
+          }}
+        />
       </head>
       <body className="min-h-screen font-sans antialiased bg-white selection:bg-ffcam selection:text-white">
         <a href="#main-content" className="skip-to-content">
