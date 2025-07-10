@@ -45,11 +45,8 @@ export default function WebinarsSection() {
       time: "20:00",
       endTime: "21:30",
       description: "Exploration des outils numériques qui facilitent la collaboration au sein de votre club : communication interne, gestion de projets, partage de documents, organisation d'événements. Des solutions concrètes présentées par des clubs qui les utilisent au quotidien.",
-      recordingLink: "/webinars/outils-collaboratifs"
-    }
-  ];
-
-  const nextWebinars = [
+      recordingLink: "/webinaires/outils-collaboratifs"
+    },
     {
       id: 2,
       title: "Environnement : Comment tisser des liens avec les associations environnementales locales et les gestionnaires d'espaces naturels protégés",
@@ -57,25 +54,18 @@ export default function WebinarsSection() {
       time: "18:00",
       endTime: "19:30",
       description: "Découvrez comment développer des partenariats avec les associations environnementales et les gestionnaires d'espaces protégés pour enrichir vos activités tout en préservant la nature.",
-      zoomLink: "https://us02web.zoom.us/j/87499337802"
-    },
+      recordingLink: "/webinaires/environnement-partenariats"
+    }
+  ];
+
+  const nextWebinars = [
     {
       id: 3,
-      title: "La charte montagne",
-      date: null, // Septembre 2025
-      time: null,
-      endTime: null,
-      description: "Comprendre et appliquer la charte montagne dans vos activités de club. Échangez sur les bonnes pratiques, les défis rencontrés et les solutions trouvées pour concilier pratique sportive et respect de l'environnement montagnard.",
-      zoomLink: null // Lien à venir
-    },
-    {
-      id: 4,
-      title: "Thème choisi par les clubs",
-      date: null, // Octobre 2025
-      time: null,
-      endTime: null,
-      description: "Un webinaire dont le thème sera déterminé par les clubs eux-mêmes ! Nous recueillerons vos propositions et votes pour aborder le sujet qui vous intéresse le plus. Une approche 100% participative.",
-      hasProposalForm: true,
+      title: "Refuges phares pour l'environnement",
+      date: "2025-10-20",
+      time: "18:00",
+      endTime: "19:30",
+      description: "Découvrez comment votre club peut s'engager dans la préservation de l'environnement à travers le programme des refuges phares. Échanges sur les bonnes pratiques, initiatives locales et partenariats durables.",
       zoomLink: null // Lien à venir
     }
   ];
@@ -131,9 +121,7 @@ export default function WebinarsSection() {
                               day: 'numeric' 
                             })
                           ) : webinar.id === 3 ? (
-                            "Septembre 2025 (date à définir)"
-                          ) : webinar.id === 4 ? (
-                            "Octobre 2025 (date à définir)"
+                            "20 octobre 2025"
                           ) : (
                             "Date à définir"
                           )}

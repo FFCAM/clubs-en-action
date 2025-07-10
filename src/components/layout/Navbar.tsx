@@ -38,25 +38,25 @@ export default function Navbar() {
             aria-label="Menu principal"
           >
             <Link
-              href="#vision"
+              href="/#vision"
               className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Notre Vision
             </Link>
             <Link
-              href="#webinaires"
+              href="/#webinaires"
               className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Webinaires
             </Link>
             <Link
-              href="#solutions"
+              href="/#solutions"
               className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Solutions
             </Link>
             <Link
-              href="#contact"
+              href="/#contact"
               className="text-sm font-medium text-gray-800 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:ring-offset-2 rounded"
             >
               Contact
@@ -88,28 +88,28 @@ export default function Navbar() {
         >
           <div className="flex flex-col space-y-2 px-4 py-3">
             <Link
-              href="#vision"
+              href="/#vision"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Notre Vision
             </Link>
             <Link
-              href="#webinaires"
+              href="/#webinaires"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Webinaires
             </Link>
             <Link
-              href="#solutions"
+              href="/#solutions"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >
               Solutions
             </Link>
             <Link
-              href="#contact"
+              href="/#contact"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-ffcam/10 hover:text-ffcam transition-colors focus:outline-none focus:ring-2 focus:ring-ffcam focus:bg-ffcam/10"
               onClick={() => setMobileMenuOpen(false)}
             >

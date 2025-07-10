@@ -77,17 +77,25 @@ export default function HeroSection() {
                   aria-hidden="true"
                 />
                 <span className="text-xs font-medium text-white sm:text-sm">
-                  Prochains webinaires
+                  Calendrier des webinaires
                 </span>
               </div>
               <div className="space-y-2 text-xs text-white sm:text-sm">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                  <span className="font-medium">30 juin • 18h-19h30 :</span>
-                  <span>Environnement et partenariats</span>
+                  <span className="font-medium">✅ 23 juin • 20h-21h30 :</span>
+                  <Link href="/webinaires/outils-collaboratifs" className="hover:text-ffcam-red transition-colors underline">
+                    Outils collaboratifs
+                  </Link>
                 </div>
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                  <span className="font-medium">Sept. (date à définir) :</span>
-                  <span>La charte montagne</span>
+                  <span className="font-medium">✅ 30 juin • 18h-19h30 :</span>
+                  <Link href="/webinaires/environnement-partenariats" className="hover:text-ffcam-red transition-colors underline">
+                    Environnement et partenariats
+                  </Link>
+                </div>
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+                  <span className="font-medium">📅 20 octobre • 18h-19h30 :</span>
+                  <span>Refuges phares pour l'environnement</span>
                 </div>
               </div>
               <Link

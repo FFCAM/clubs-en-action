@@ -13,7 +13,10 @@
       "Bash(rm:*)",
       "Bash(mkdir:*)",
       "Bash(rg:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(wrangler pages deploy:*)",
+      "Bash(pdftotext:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
