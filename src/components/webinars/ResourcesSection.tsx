@@ -105,7 +105,7 @@ export default function ResourcesSection() {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     setTools(shuffled);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="bg-white rounded-lg shadow-lg p-8">

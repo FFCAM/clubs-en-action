@@ -173,7 +173,7 @@ export default function WebinarsSection() {
                             variant="secondary"
                             size="sm"
                             icon={<Video className="w-4 h-4" />}
-                            onClick={() => window.open(webinar.zoomLink, '_blank')}
+                            onClick={() => webinar.zoomLink && window.open(webinar.zoomLink, '_blank')}
                             className="justify-center w-full text-sm"
                           >
                             Rejoindre sur Zoom
@@ -182,7 +182,7 @@ export default function WebinarsSection() {
                             variant="secondary"
                             size="sm"
                             icon={copiedId === webinar.id ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                            onClick={() => copyToClipboard(webinar.zoomLink!, webinar.id)}
+                            onClick={() => webinar.zoomLink && copyToClipboard(webinar.zoomLink, webinar.id)}
                             className="justify-center w-full text-sm"
                           >
                             {copiedId === webinar.id ? "Lien copié !" : "Copier le lien"}
@@ -198,18 +198,6 @@ export default function WebinarsSection() {
                         >
                           Lien Zoom à venir
                         </FFCAMButton>
-                      )}
-                      {webinar.hasProposalForm && (
-                        <Link href="#contact">
-                          <FFCAMButton
-                            variant="outline"
-                            size="sm"
-                            icon={<UserPlus className="w-4 h-4" />}
-                            className="justify-center w-full text-sm"
-                          >
-                            Proposer un thème
-                          </FFCAMButton>
-                        </Link>
                       )}
                     </div>
                   </div>
