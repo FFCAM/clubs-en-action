@@ -7,46 +7,56 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Development
 - `pnpm install` - Install dependencies (pnpm is required)
 - `pnpm dev` - Start development server with Turbopack (recommended)
-- `pnpm dev:webpack` - Start development server with Webpack
+- `pnpm dev:webpack` - Start development server with Webpack (fallback option)
 - `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run Next.js linter
+
+### Testing
 - `pnpm test` - Run all tests
 - `pnpm test:watch` - Run tests in watch mode
-- `pnpm lint` - Run Next.js linter
+- `pnpm test:with-server` - Run tests with development server
+- `pnpm test:integration` - Run integration tests only
+- `pnpm test:all` - Run all tests with server and coverage
+- `pnpm test -- __tests__/contact-form.test.tsx` - Test a single file
+- `pnpm test -- --coverage` - Run tests with coverage report
 
 ### Deployment
 - `pnpm pages:build` - Build for Cloudflare Pages using next-on-pages
 - `pnpm preview` - Preview Cloudflare Pages build locally with Wrangler
 - `pnpm deploy` - Deploy to Cloudflare Pages
 
-### Test a single file
-```bash
-pnpm test -- __tests__/contact-form.test.tsx
-```
-
 ## Architecture Overview
 
 This is a Next.js 15 application using the App Router, deployed on Cloudflare Pages with edge runtime support.
 
 ### Core Technologies
-- **Framework**: Next.js 15.3.1 with React 19 and App Router
+- **Framework**: Next.js 15.3.3 with React 19 and App Router
 - **Styling**: Tailwind CSS with custom FFCAM brand colors
 - **Deployment**: Cloudflare Pages with Edge Runtime
 - **Testing**: Jest with React Testing Library
 - **Email**: Resend API for contact form notifications
+- **Package Manager**: pnpm (required)
 
 ### Project Structure
 - `/src/app/` - Next.js App Router pages and API routes
   - `/api/contact/` - Contact form submission endpoint with CSRF protection
   - `/api/csrf/` - CSRF token generation endpoint
+  - `/confidentialite/` - Privacy policy page
+  - `/webinaires/` - Webinar summary pages (French URLs)
+    - `/outils-collaboratifs/` - Collaborative tools webinar summary
+    - `/environnement-partenariats/` - Environment partnerships webinar detailed summary
   - Page components use `.tsx` extension
 - `/src/components/` - Reusable React components
   - `/forms/` - Form components (e.g., ContactForm)
-  - `/home/` - Homepage sections (Hero, FAQ, Solutions, etc.)
+  - `/home/` - Homepage sections (Hero, FAQ, Solutions, Vision, Webinars)
   - `/layout/` - Layout components (Navbar, Footer)
   - `/ui/` - UI components library (FFCAMComponents)
+  - `/webinars/` - Webinar-specific components (summaries, resources, Q&A sections)
 - `/src/utils/` - Utility functions
   - `/csrf/` - CSRF token generation and verification
   - `email.ts` - Email sending functionality using Resend
+- `/__tests__/` - Test files organized by component/feature
 
 ### Key Architectural Patterns
 
@@ -61,6 +71,7 @@ This is a Next.js 15 application using the App Router, deployed on Cloudflare Pa
    - Section components are organized by feature (e.g., `home/` folder)
    - Each major section has its own component file
    - Shared UI components are in `ui/FFCAMComponents.tsx`
+   - Webinar components in `/webinars/` for summaries, resources, and Q&A sections
 
 4. **Security Headers**: Comprehensive security headers configured in `next.config.ts` including CSP, HSTS, and other protections.
 
@@ -68,6 +79,8 @@ This is a Next.js 15 application using the App Router, deployed on Cloudflare Pa
    - Component tests with user interaction simulation
    - API route testing with mocked dependencies
    - Path aliases configured for clean imports (`@/components`, `@/utils`, etc.)
+   - Jest configuration in `jest.config.js` with jsdom environment
+   - Test files in `__tests__/` directory
 
 ### Environment Variables Required
 - `RESEND_API_KEY` - API key for Resend email service
@@ -78,6 +91,14 @@ This is a Next.js 15 application using the App Router, deployed on Cloudflare Pa
 - KV namespace binding: `CLUBS_KV` (configured in wrangler.jsonc)
 - Edge runtime required for all API routes
 - Static assets served from `.vercel/output/static` directory
+- Compatibility date: 2025-05-10 with nodejs_compat flag
 
 ### Font Loading
 The application uses Poppins font loaded locally via Next.js font optimization (no external font requests).
+
+### Webinar Management
+- **URL Structure**: Uses French URLs (`/webinaires/`) for consistency with target audience
+- **Navigation**: All internal links use absolute paths (`/#section`) to work properly from subpages
+- **Content Organization**: Past webinars moved to dedicated summary pages with detailed content
+- **Upcoming Webinars**: Future webinars displayed with calendar integration and Zoom links when available
+- **Calendar Integration**: Uses add-to-calendar-button-react for calendar exports

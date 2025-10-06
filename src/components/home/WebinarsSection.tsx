@@ -63,10 +63,10 @@ export default function WebinarsSection() {
       id: 3,
       title: "Refuges phares pour l'environnement",
       date: "2025-10-20",
-      time: "18:00",
-      endTime: "19:30",
+      time: "18:30",
+      endTime: "20:00",
       description: "Découvrez comment votre club peut s'engager dans la préservation de l'environnement à travers le programme des refuges phares. Échanges sur les bonnes pratiques, initiatives locales et partenariats durables.",
-      zoomLink: null // Lien à venir
+      zoomLink: "https://us02web.zoom.us/j/83861629151"
     }
   ];
 
