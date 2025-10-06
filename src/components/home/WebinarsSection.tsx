@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Calendar, Star, UserPlus, Video, Copy, Check } from "lucide-react";
 import { FFCAMSection, FFCAMHeading, FFCAMSubheading, FFCAMCard, FFCAMBadge, FFCAMButton } from "@/components";
+import { getPastWebinars, getNextWebinars } from "@/data/webinars";
 
 // Dynamic import pour éviter les erreurs d'hydratation
 const AddToCalendarButton = dynamic(
@@ -37,38 +38,8 @@ export default function WebinarsSection() {
     }
   };
 
-  const pastWebinars = [
-    {
-      id: 1,
-      title: "Outils collaboratifs dans les Clubs",
-      date: "2025-06-23",
-      time: "20:00",
-      endTime: "21:30",
-      description: "Exploration des outils numériques qui facilitent la collaboration au sein de votre club : communication interne, gestion de projets, partage de documents, organisation d'événements. Des solutions concrètes présentées par des clubs qui les utilisent au quotidien.",
-      recordingLink: "/webinaires/outils-collaboratifs"
-    },
-    {
-      id: 2,
-      title: "Environnement : Comment tisser des liens avec les associations environnementales locales et les gestionnaires d'espaces naturels protégés",
-      date: "2025-06-30",
-      time: "18:00",
-      endTime: "19:30",
-      description: "Découvrez comment développer des partenariats avec les associations environnementales et les gestionnaires d'espaces protégés pour enrichir vos activités tout en préservant la nature.",
-      recordingLink: "/webinaires/environnement-partenariats"
-    }
-  ];
-
-  const nextWebinars = [
-    {
-      id: 3,
-      title: "Refuges phares pour l'environnement",
-      date: "2025-10-20",
-      time: "18:30",
-      endTime: "20:00",
-      description: "Découvrez comment votre club peut s'engager dans la préservation de l'environnement à travers le programme des refuges phares. Échanges sur les bonnes pratiques, initiatives locales et partenariats durables.",
-      zoomLink: "https://us02web.zoom.us/j/83861629151"
-    }
-  ];
+  const pastWebinars = getPastWebinars();
+  const nextWebinars = getNextWebinars();
 
   const upcomingThemes = [
     "Suite d'outils collaboratifs",
@@ -237,16 +208,18 @@ export default function WebinarsSection() {
                     </div>
                     <p className="text-sm text-gray-600 sm:text-base">{webinar.description}</p>
                     <div className="flex flex-col gap-2 pt-3 sm:gap-3 sm:pt-4">
-                      <Link href={webinar.recordingLink}>
-                        <FFCAMButton
-                          variant="primary"
-                          size="sm"
-                          icon={<Video className="w-4 h-4" />}
-                          className="justify-center w-full text-sm"
-                        >
-                          Voir le compte-rendu
-                        </FFCAMButton>
-                      </Link>
+                      {webinar.recordingLink && (
+                        <Link href={webinar.recordingLink}>
+                          <FFCAMButton
+                            variant="primary"
+                            size="sm"
+                            icon={<Video className="w-4 h-4" />}
+                            className="justify-center w-full text-sm"
+                          >
+                            Voir le compte-rendu
+                          </FFCAMButton>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </FFCAMCard>

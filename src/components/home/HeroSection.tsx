@@ -3,8 +3,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getPastWebinars, getNextWebinars } from "@/data/webinars";
+
+/**
+ * Format webinar date and time for display
+ * @example formatWebinarDate("2025-06-23", "20:00", "21:30") => "23 juin • 20h-21h30"
+ */
+function formatWebinarDate(date: string, time: string, endTime: string): string {
+  const dateObj = new Date(date);
+  const day = dateObj.getDate();
+  const month = dateObj.toLocaleDateString('fr-FR', { month: 'long' });
+
+  // Convert HH:MM to HHh format
+  const formatTime = (t: string) => t.substring(0, 2) + 'h' + (t.substring(3, 5) !== '00' ? t.substring(3, 5) : '');
+
+  return `${day} ${month} • ${formatTime(time)}-${formatTime(endTime)}`;
+}
 
 export default function HeroSection() {
+  // Get all webinars (past + next), limit to 3 most relevant
+  const allWebinars = [...getPastWebinars().slice(-2), ...getNextWebinars().slice(0, 3)].slice(0, 3);
+
   return (
     <section className="relative py-20 overflow-hidden sm:py-28">
       {/* Image de montagne en arrière-plan */}
@@ -81,22 +100,27 @@ export default function HeroSection() {
                 </span>
               </div>
               <div className="space-y-2 text-xs text-white sm:text-sm">
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                  <span className="font-medium">✅ 23 juin • 20h-21h30 :</span>
-                  <Link href="/webinaires/outils-collaboratifs" className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded">
-                    Outils collaboratifs
-                  </Link>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                  <span className="font-medium">✅ 30 juin • 18h-19h30 :</span>
-                  <Link href="/webinaires/environnement-partenariats" className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded">
-                    Environnement et partenariats
-                  </Link>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                  <span className="font-medium">📅 20 octobre • 18h-19h30 :</span>
-                  <span>Refuges phares pour l'environnement</span>
-                </div>
+                {allWebinars.map((webinar) => {
+                  const isPast = new Date(webinar.date) < new Date();
+                  const icon = isPast ? "✅" : "📅";
+                  const formattedDate = formatWebinarDate(webinar.date, webinar.time, webinar.endTime);
+
+                  return (
+                    <div key={webinar.id} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+                      <span className="font-medium">{icon} {formattedDate} :</span>
+                      {webinar.recordingLink ? (
+                        <Link
+                          href={webinar.recordingLink}
+                          className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded"
+                        >
+                          {webinar.title}
+                        </Link>
+                      ) : (
+                        <span>{webinar.title}</span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
               <Link
                 href="#webinaires"

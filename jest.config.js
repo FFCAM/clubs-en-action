@@ -4,6 +4,7 @@ module.exports = {
     "^@/components(.*)$": "<rootDir>/src/components$1",
     "^@/app(.*)$": "<rootDir>/src/app$1",
     "^@/utils(.*)$": "<rootDir>/src/utils$1",
+    "^@/data(.*)$": "<rootDir>/src/data$1",
     "^@/public(.*)$": "<rootDir>/public$1",
     "^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|svg)$": "<rootDir>/__mocks__/fileMock.js",
   },
