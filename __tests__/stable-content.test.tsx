@@ -63,12 +63,13 @@ describe('Tests de contenu stable', () => {
 
     it('les liens pointent vers les bonnes sections', () => {
       render(<Navbar />);
-      
+
       const contactLink = screen.getAllByText('Contact')[0].closest('a');
       const webinairesLink = screen.getAllByText('Webinaires')[0].closest('a');
-      
-      expect(contactLink?.getAttribute('href')).toBe('#contact');
-      expect(webinairesLink?.getAttribute('href')).toBe('#webinaires');
+
+      // Accept both relative (#section) and absolute (/#section) paths
+      expect(contactLink?.getAttribute('href')).toMatch(/^\/?#contact$/);
+      expect(webinairesLink?.getAttribute('href')).toMatch(/^\/?#webinaires$/);
     });
   });
 
@@ -179,13 +180,13 @@ describe('Tests de contenu stable', () => {
 
     it('utilise des liens avec destinations valides', () => {
       render(<HeroSection />);
-      
+
       const links = screen.getAllByRole('link');
       links.forEach(link => {
         const href = link.getAttribute('href');
         expect(href).toBeTruthy();
-        // Vérifie que c'est soit une ancre, soit une URL valide
-        expect(href?.startsWith('#') || href?.startsWith('http')).toBe(true);
+        // Vérifie que c'est soit une ancre, soit un chemin absolu, soit une URL valide
+        expect(href?.startsWith('#') || href?.startsWith('/') || href?.startsWith('http')).toBe(true);
       });
     });
 

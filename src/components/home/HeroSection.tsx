@@ -83,13 +83,13 @@ export default function HeroSection() {
               <div className="space-y-2 text-xs text-white sm:text-sm">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
                   <span className="font-medium">✅ 23 juin • 20h-21h30 :</span>
-                  <Link href="/webinaires/outils-collaboratifs" className="hover:text-ffcam-red transition-colors underline">
+                  <Link href="/webinaires/outils-collaboratifs" className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded">
                     Outils collaboratifs
                   </Link>
                 </div>
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
                   <span className="font-medium">✅ 30 juin • 18h-19h30 :</span>
-                  <Link href="/webinaires/environnement-partenariats" className="hover:text-ffcam-red transition-colors underline">
+                  <Link href="/webinaires/environnement-partenariats" className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded">
                     Environnement et partenariats
                   </Link>
                 </div>

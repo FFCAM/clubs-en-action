@@ -59,10 +59,10 @@ describe('HeroSection', () => {
 
   it('contient une section de webinaires à venir', () => {
     render(<HeroSection />);
-    
-    // Vérifie la présence d'informations sur les prochains webinaires
-    expect(screen.getByText(/prochains webinaires/i)).toBeInTheDocument();
-    
+
+    // Vérifie la présence d'informations sur le calendrier des webinaires
+    expect(screen.getByText(/calendrier des webinaires/i)).toBeInTheDocument();
+
     // Vérifie qu'il y a un lien vers les détails
     const detailsLink = screen.getByLabelText(/voir.*webinaires/i);
     expect(detailsLink).toBeInTheDocument();
