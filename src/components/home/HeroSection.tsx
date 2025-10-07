@@ -21,8 +21,10 @@ function formatWebinarDate(date: string, time: string, endTime: string): string 
 }
 
 export default function HeroSection() {
-  // Get all webinars (past + next), limit to 3 most relevant
-  const allWebinars = [...getPastWebinars().slice(-2), ...getNextWebinars().slice(0, 3)].slice(0, 3);
+  // Prioritize upcoming webinars, then show recent past ones
+  const nextWebinars = getNextWebinars().slice(0, 3);
+  const pastWebinars = getPastWebinars().slice(-2);
+  const allWebinars = [...nextWebinars, ...pastWebinars].slice(0, 3);
 
   return (
     <section className="relative py-20 overflow-hidden sm:py-28">
@@ -105,12 +107,15 @@ export default function HeroSection() {
                   const icon = isPast ? "✅" : "📅";
                   const formattedDate = formatWebinarDate(webinar.date, webinar.time, webinar.endTime);
 
+                  // For upcoming webinars without recording, link to webinars section
+                  const linkHref = webinar.recordingLink || (!isPast ? "/#webinaires" : null);
+
                   return (
                     <div key={webinar.id} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
                       <span className="font-medium">{icon} {formattedDate} :</span>
-                      {webinar.recordingLink ? (
+                      {linkHref ? (
                         <Link
-                          href={webinar.recordingLink}
+                          href={linkHref}
                           className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded"
                         >
                           {webinar.title}
