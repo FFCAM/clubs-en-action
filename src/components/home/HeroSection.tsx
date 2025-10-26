@@ -21,9 +21,11 @@ function formatWebinarDate(date: string, time: string, endTime: string): string 
 }
 
 export default function HeroSection() {
-  // Prioritize upcoming webinars, then show recent past ones
-  const nextWebinars = getNextWebinars().slice(0, 3);
-  const pastWebinars = getPastWebinars().slice(-2);
+  // Get webinars: prioritize upcoming ones, then show recent past ones
+  const nextWebinars = getNextWebinars();
+  const pastWebinars = getPastWebinars();
+
+  // Show up to 3 webinars total: all upcoming ones first, then most recent past ones
   const allWebinars = [...nextWebinars, ...pastWebinars].slice(0, 3);
 
   return (
