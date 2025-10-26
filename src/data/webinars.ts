@@ -45,7 +45,7 @@ export const webinars: Webinar[] = [
     time: "18:30",
     endTime: "20:00",
     description: "Découvrez comment votre club peut s'engager dans la préservation de l'environnement à travers le programme des refuges phares. Échanges sur les bonnes pratiques, initiatives locales et partenariats durables.",
-    zoomLink: "https://us02web.zoom.us/j/83861629151"
+    recordingLink: "/webinaires/refuges-phares"
   }
 ];
 
