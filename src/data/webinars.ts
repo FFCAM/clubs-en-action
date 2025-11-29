@@ -46,6 +46,14 @@ export const webinars: Webinar[] = [
     endTime: "20:00",
     description: "Découvrez comment votre club peut s'engager dans la préservation de l'environnement à travers le programme des refuges phares. Échanges sur les bonnes pratiques, initiatives locales et partenariats durables.",
     recordingLink: "/webinaires/refuges-phares"
+  },
+  {
+    id: 4,
+    title: "Gestion des EPIs dans les clubs",
+    date: "2025-12-15",
+    time: "19:00",
+    endTime: "20:30",
+    description: "Présentation de la réglementation et des responsabilités liées aux Équipements de Protection Individuelle (EPIs) dans les clubs, suivie de retours d'expérience sur les solutions mises en place par les clubs pour gérer ces équipements.",
   }
 ];
 
