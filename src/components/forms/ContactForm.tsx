@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ArrowRight, Check, AlertTriangle } from 'lucide-react';
 import { FFCAMSection, FFCAMHeading, FFCAMSubheading, FFCAMButton } from '@/components';
 import { useId } from 'react';
+import { isValidEmail } from '@/utils/validation';
 
 // Define the response type for CSRF API
 interface CsrfResponse {
@@ -72,9 +73,8 @@ export default function ContactForm() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const email = formData.get('email')?.toString() || '';
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    if (!emailRegex.test(email)) {
+
+    if (!isValidEmail(email)) {
       setSubmitStatus('error');
       setErrorMessage('Veuillez saisir une adresse email valide');
       setIsSubmitting(false);

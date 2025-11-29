@@ -84,7 +84,7 @@ export default function HeroSection() {
             <div className="mt-8 lg:hidden">
               <div className="relative h-48 rounded-xl overflow-hidden shadow-lg bg-white/20 backdrop-blur-sm border border-white/30 sm:h-56 md:h-64">
                 <Image
-                  src="/images/webinaires-clubs-en-action.png"
+                  src="/images/webinaires-clubs-en-action.jpg"
                   alt="Webinaires Clubs en Action - FFCAM"
                   fill
                   className="object-cover object-center"
@@ -144,7 +144,7 @@ export default function HeroSection() {
           <div className="hidden mt-10 lg:block lg:col-span-5 lg:mt-0">
             <div className="relative h-80 lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl bg-white/20 backdrop-blur-sm border-2 border-white/30">
               <Image
-                src="/images/webinaires-clubs-en-action.png"
+                src="/images/webinaires-clubs-en-action.jpg"
                 alt="Webinaires Clubs en Action - FFCAM"
                 fill
                 className="object-cover object-center"

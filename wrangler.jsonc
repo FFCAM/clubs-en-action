@@ -5,7 +5,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "clubs-en-action",
-	"compatibility_date": "2025-05-10",
+	"compatibility_date": "2025-11-01",
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
@@ -13,10 +13,4 @@
 	"observability": {
 		"enabled": true
 	},
-	"kv_namespaces": [
-		{
-			"binding": "CLUBS_KV",
-			"id": "9dba60b7b29743b38a612d44b10eb4c0"
-		}
-	],
 }

@@ -8,7 +8,9 @@ import { Navbar } from '@/components';
 // Mock des composants externes
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ alt, ...props }: any) => <img alt={alt} {...props} />,
+  default: ({ alt, src, fill, priority, ...props }: any) => (
+    <img alt={alt} src={typeof src === 'object' ? src.src : src} {...props} />
+  ),
 }));
 
 jest.mock('next/link', () => ({

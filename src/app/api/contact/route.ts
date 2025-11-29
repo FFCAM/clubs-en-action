@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendContactFormEmail } from "../../../utils/email";
 import { verifyCSRFToken } from "../../../utils/csrf";
+import { isValidEmail } from "../../../utils/validation";
 
 // Assurez-vous que la variable d'environnement RESEND_API_KEY est configurée dans votre projet Cloudflare
 
@@ -40,7 +41,8 @@ export async function POST(request: NextRequest) {
     const cookieCsrfToken = request.cookies.get("csrf")?.value;
 
     // Validate CSRF token (Double Submit Cookie Pattern)
-    if (!csrfToken || !cookieCsrfToken || csrfToken !== cookieCsrfToken || !verifyCSRFToken(csrfToken)) {
+    const isValidToken = await verifyCSRFToken(csrfToken || '');
+    if (!csrfToken || !cookieCsrfToken || csrfToken !== cookieCsrfToken || !isValidToken) {
       return NextResponse.json(
         {
           success: false,
@@ -51,8 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email || '')) {
+    if (!isValidEmail(email || '')) {
       return NextResponse.json(
         {
           success: false,
@@ -106,7 +107,17 @@ export async function POST(request: NextRequest) {
     console.log("Nouvelle soumission de formulaire:", data);
 
     // Adresse de destination pour recevoir les notifications du formulaire
-    const destinationEmail = process.env.CONTACT_EMAIL || "n.ritouet@ffcam.fr";
+    const destinationEmail = process.env.CONTACT_EMAIL;
+    if (!destinationEmail) {
+      console.error("CONTACT_EMAIL environment variable is not set");
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Configuration serveur incomplète. Veuillez contacter l'administrateur.",
+        },
+        { status: 500 },
+      );
+    }
 
     try {
       // Utiliser la fonction d'envoi d'email définie dans utils/email.ts
