@@ -1,3 +1,17 @@
+import { env } from "@/env";
+
+/**
+ * Échappe les caractères HTML pour prévenir les attaques XSS
+ */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export interface EmailResult {
   success: boolean;
   id?: string;
@@ -31,16 +45,6 @@ export async function sendEmail(options: {
   html?: string;
   reply_to?: string;
 }): Promise<EmailResult> {
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
-
-  // Valider la clé API
-  if (!RESEND_API_KEY) {
-    console.error("Erreur: Clé API Resend manquante");
-    return {
-      success: false,
-      error: "Configuration Resend incomplète - Clé API manquante",
-    };
-  }
 
   try {
     // Préparer les données pour l'API Resend
@@ -57,7 +61,7 @@ export async function sendEmail(options: {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
@@ -139,12 +143,12 @@ export async function sendContactFormEmail(
   textBody += `${dateSoumission}\t${cleanName}\t${cleanEmail}\t${cleanClub}\t${suggestTheme}\t${shareSolution}\t${participate}\t${feedback}\t${helpOrganize}\t${cleanTheme}\t${cleanSolution}\t${newsletter}\n`;
   textBody += `\n(Colonnes: Date\tNom\tEmail\tClub\tSuggère un thème\tPartage solution\tParticipe\tFeedback\tAide à organiser\tThème suggéré\tSolution\tNewsletter)\n`;
 
-  // Créer le corps du message en HTML
+  // Créer le corps du message en HTML (avec échappement XSS)
   let htmlBody = `<h2>Nouveau message reçu via le formulaire de Clubs en Action</h2>`;
-  htmlBody += `<p><strong>Nom:</strong> ${formData.name}</p>`;
-  htmlBody += `<p><strong>Email:</strong> ${formData.email}</p>`;
-  htmlBody += `<p><strong>Club:</strong> ${formData.club}</p>`;
-  htmlBody += `<p><strong>Message:</strong> ${formData.message}</p>`;
+  htmlBody += `<p><strong>Nom:</strong> ${escapeHtml(formData.name)}</p>`;
+  htmlBody += `<p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>`;
+  htmlBody += `<p><strong>Club:</strong> ${escapeHtml(formData.club)}</p>`;
+  htmlBody += `<p><strong>Message:</strong> ${escapeHtml(formData.message)}</p>`;
 
   if (formData["suggest-theme"])
     htmlBody += `<p><strong>Suggérer un thème:</strong> Oui</p>`;
@@ -157,15 +161,15 @@ export async function sendContactFormEmail(
   if (formData["help-organize"])
     htmlBody += `<p><strong>Aider à organiser des webinaires:</strong> Oui</p>`;
   if (formData.theme)
-    htmlBody += `<p><strong>Thème suggéré:</strong> ${formData.theme}</p>`;
+    htmlBody += `<p><strong>Thème suggéré:</strong> ${escapeHtml(formData.theme)}</p>`;
   if (formData.solution)
-    htmlBody += `<p><strong>Solution:</strong> ${formData.solution}</p>`;
+    htmlBody += `<p><strong>Solution:</strong> ${escapeHtml(formData.solution)}</p>`;
   if (formData.newsletter)
     htmlBody += `<p><strong>Inscription newsletter:</strong> Oui</p>`;
     
-  // Ajouter un format pour Google Sheets en HTML
+  // Ajouter un format pour Google Sheets en HTML (avec échappement XSS)
   htmlBody += `<br><hr><h3>Format pour Google Sheets</h3>`;
-  htmlBody += `<pre style="font-family: monospace; background-color: #f5f5f5; padding: 10px; border: 1px solid #ddd; border-radius: 4px; overflow-x: auto;">${dateSoumission}\t${cleanName}\t${cleanEmail}\t${cleanClub}\t${suggestTheme}\t${shareSolution}\t${participate}\t${feedback}\t${helpOrganize}\t${cleanTheme}\t${cleanSolution}\t${newsletter}</pre>`;
+  htmlBody += `<pre style="font-family: monospace; background-color: #f5f5f5; padding: 10px; border: 1px solid #ddd; border-radius: 4px; overflow-x: auto;">${escapeHtml(dateSoumission)}\t${escapeHtml(cleanName)}\t${escapeHtml(cleanEmail)}\t${escapeHtml(cleanClub)}\t${suggestTheme}\t${shareSolution}\t${participate}\t${feedback}\t${helpOrganize}\t${escapeHtml(cleanTheme)}\t${escapeHtml(cleanSolution)}\t${newsletter}</pre>`;
   htmlBody += `<p><small><em>Colonnes: Date | Nom | Email | Club | Suggère un thème | Partage solution | Participe | Feedback | Aide à organiser | Thème suggéré | Solution | Newsletter</em></small></p>`;
   
   // Ajout d'instructions pour le copier-coller

@@ -1,7 +1,7 @@
 # Clubs en Action - FFCAM
 
 [![Deploy to Cloudflare Pages](https://github.com/ffcam/clubs-en-action/actions/workflows/cloudflare-pages-deploy.yml/badge.svg)](https://github.com/ffcam/clubs-en-action/actions/workflows/cloudflare-pages-deploy.yml)
-[![Next.js](https://img.shields.io/badge/Next.js-15.3-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
@@ -19,7 +19,7 @@
 ## 🛠 Stack technique
 
 ### Frontend
-- **Framework** : [Next.js 15.3](https://nextjs.org/) avec App Router
+- **Framework** : [Next.js 15.5](https://nextjs.org/) avec App Router
 - **Langage** : [TypeScript](https://www.typescriptlang.org/)
 - **Styles** : [Tailwind CSS](https://tailwindcss.com/) avec design system FFCAM
 - **Composants** : React 19 avec composants serveur
@@ -28,6 +28,7 @@
 - **Runtime** : Edge Runtime (Cloudflare Workers)
 - **Hébergement** : [Cloudflare Pages](https://pages.cloudflare.com/)
 - **Email** : [Resend](https://resend.com/) pour les notifications
+- **Validation** : [Zod](https://zod.dev/) pour la validation des variables d'environnement
 - **CDN** : Cloudflare avec cache automatique
 
 ### Outils de développement
@@ -107,6 +108,7 @@ clubs-en-action/
 │   │   ├── home/         # Sections de la page d'accueil
 │   │   ├── layout/       # Header, Footer, etc.
 │   │   └── ui/           # Composants UI réutilisables
+│   ├── env.ts            # Validation des variables d'environnement (Zod)
 │   └── utils/            # Fonctions utilitaires
 │       ├── csrf/         # Protection CSRF
 │       └── email.ts      # Envoi d'emails
@@ -120,45 +122,62 @@ clubs-en-action/
 
 ### POST `/api/contact`
 
-Traite les soumissions du formulaire de contact avec protection CSRF.
+Traite les soumissions du formulaire de contact avec protection CSRF et validation.
 
-**Body (JSON):**
+**Body (FormData):**
+| Champ | Type | Requis | Description |
+|-------|------|--------|-------------|
+| `name` | string | ✅ | Nom de l'expéditeur |
+| `email` | string | ✅ | Email de l'expéditeur |
+| `club` | string | ✅ | Nom du club |
+| `message` | string | ✅ | Message |
+| `csrf_token` | string | ✅ | Token CSRF |
+| `theme` | string | ❌ | Thème suggéré |
+| `solution` | string | ❌ | Solution à partager |
+| `newsletter` | string | ❌ | Inscription newsletter |
+
+**Cookie requis:** `csrf` (défini automatiquement par `/api/csrf`)
+
+**Réponse succès (200):**
 ```json
 {
-  "name": "string",
-  "clubName": "string",
-  "email": "string",
-  "theme": "string",
-  "message": "string",
-  "csrfToken": "string"
+  "success": true,
+  "message": "Merci ! Votre message a bien été reçu."
 }
 ```
-
-**Headers requis:**
-- `Content-Type: application/json`
-- Cookie `csrf-token` (généré automatiquement)
 
 ### GET `/api/csrf`
 
-Génère un token CSRF pour la protection des formulaires.
+Génère un token CSRF pour la protection des formulaires (Double Submit Cookie Pattern).
 
-**Response:**
+**Réponse:**
 ```json
 {
-  "token": "string"
+  "success": true,
+  "csrfToken": "uuid:timestamp:signature"
 }
 ```
 
-> **Note :** Le système actuel utilise l'email pour les notifications. Une évolution vers une base de données est prévue pour une meilleure gestion des données.
+Le token est également stocké dans un cookie `csrf` (httpOnly, 15 min d'expiration).
+
+## 🔒 Sécurité
+
+- **CSRF** : Double Submit Cookie Pattern avec signature HMAC-SHA256
+- **XSS** : Échappement HTML des données utilisateur dans les emails
+- **Headers** : CSP, HSTS, X-Frame-Options, etc. configurés dans `next.config.ts`
+- **Validation** : Zod pour les variables d'environnement, validation des emails
 
 ## 🔐 Variables d'environnement
 
 ### Variables requises
 
+Les variables sont validées au démarrage avec [Zod](https://zod.dev/). L'application ne démarrera pas si une variable est manquante ou invalide.
+
 | Variable | Description | Exemple |
 |----------|-------------|----------|
 | `RESEND_API_KEY` | Clé API pour l'envoi d'emails via Resend | `re_123abc...` |
 | `CONTACT_EMAIL` | Email destinataire des formulaires | `contact@example.com` |
+| `CSRF_SECRET` | Secret pour la signature HMAC des tokens CSRF (min. 32 caractères) | `openssl rand -base64 32` |
 
 ### Configuration
 
@@ -171,6 +190,7 @@ Génère un token CSRF pour la protection des formulaires.
 # .env.local
 RESEND_API_KEY=re_votre_cle_api
 CONTACT_EMAIL=votre@email.com
+CSRF_SECRET=$(openssl rand -base64 32)
 ```
 
 ## 🧪 Tests

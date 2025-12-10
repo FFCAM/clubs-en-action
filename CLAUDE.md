@@ -31,11 +31,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a Next.js 15 application using the App Router, deployed on Cloudflare Pages with edge runtime support.
 
 ### Core Technologies
-- **Framework**: Next.js 15.3.3 with React 19 and App Router
+- **Framework**: Next.js 15.5 with React 19 and App Router
 - **Styling**: Tailwind CSS with custom FFCAM brand colors
 - **Deployment**: Cloudflare Pages with Edge Runtime
 - **Testing**: Jest with React Testing Library
 - **Email**: Resend API for contact form notifications
+- **Validation**: Zod for environment variables and runtime validation
 - **Package Manager**: pnpm (required)
 
 ### Project Structure
@@ -56,6 +57,7 @@ This is a Next.js 15 application using the App Router, deployed on Cloudflare Pa
 - `/src/utils/` - Utility functions
   - `/csrf/` - CSRF token generation and verification
   - `email.ts` - Email sending functionality using Resend
+- `/src/env.ts` - Environment variables validation with Zod (fails fast on missing vars)
 - `/__tests__/` - Test files organized by component/feature
 
 ### Key Architectural Patterns
@@ -83,8 +85,10 @@ This is a Next.js 15 application using the App Router, deployed on Cloudflare Pa
    - Test files in `__tests__/` directory
 
 ### Environment Variables Required
+All variables are validated at startup with Zod (`src/env.ts`). The app will fail to start if any are missing.
 - `RESEND_API_KEY` - API key for Resend email service
 - `CONTACT_EMAIL` - Destination email for form submissions
+- `CSRF_SECRET` - Secret for HMAC signing of CSRF tokens (minimum 32 characters)
 
 ### Cloudflare Integration
 - Uses `@cloudflare/next-on-pages` for deployment

@@ -6,6 +6,7 @@ module.exports = {
     "^@/utils(.*)$": "<rootDir>/src/utils$1",
     "^@/data(.*)$": "<rootDir>/src/data$1",
     "^@/public(.*)$": "<rootDir>/public$1",
+    "^@/env$": "<rootDir>/__mocks__/env.ts",
     "^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|svg)$": "<rootDir>/__mocks__/fileMock.js",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],

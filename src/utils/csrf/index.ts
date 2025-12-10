@@ -1,3 +1,5 @@
+import { env } from "@/env";
+
 /**
  * CSRF Protection Utils pour Cloudflare Edge Runtime
  * Utilise HMAC-SHA256 pour signer les tokens
@@ -13,10 +15,7 @@ const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9
  * Génère une clé HMAC à partir du secret
  */
 async function getHmacKey(): Promise<CryptoKey> {
-  // Utilise une variable d'environnement ou une clé par défaut (moins sécurisé)
-  const secret = typeof process !== 'undefined' && process.env?.CSRF_SECRET
-    ? process.env.CSRF_SECRET
-    : 'default-csrf-secret-change-in-production';
+  const secret = env.CSRF_SECRET;
 
   const encoder = new TextEncoder();
   const keyData = encoder.encode(secret);

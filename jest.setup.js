@@ -1,6 +1,14 @@
 // jest.setup.js
 require('@testing-library/jest-dom');
 
+// Polyfill crypto pour les tests
+const { webcrypto, randomUUID } = require('crypto');
+global.crypto = {
+  ...webcrypto,
+  randomUUID: randomUUID,
+  subtle: webcrypto.subtle,
+};
+
 // Mock Next.js router
 jest.mock('next/navigation', () => ({
   useRouter: () => ({

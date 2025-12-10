@@ -1,30 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendContactFormEmail } from "../../../utils/email";
-import { verifyCSRFToken } from "../../../utils/csrf";
-import { isValidEmail } from "../../../utils/validation";
+import { sendContactFormEmail, ContactFormData } from "@/utils/email";
+import { verifyCSRFToken } from "@/utils/csrf";
+import { isValidEmail } from "@/utils/validation";
+import { env } from "@/env";
 
-// Assurez-vous que la variable d'environnement RESEND_API_KEY est configurée dans votre projet Cloudflare
-
-// Required for Cloudflare Pages with Next.js app router
 export const runtime = "edge";
-
-// Utilisation de l'interface du module email.ts
-interface ContactFormData {
-  name: string;
-  email: string;
-  club: string;
-  "suggest-theme"?: string;
-  "share-solution"?: string;
-  participate?: string;
-  feedback?: string;
-  "help-organize"?: string;
-  theme?: string;
-  solution?: string;
-  message: string;
-  newsletter?: string;
-  timestamp?: string;
-  csrf_token?: string;
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -107,17 +87,7 @@ export async function POST(request: NextRequest) {
     console.log("Nouvelle soumission de formulaire:", data);
 
     // Adresse de destination pour recevoir les notifications du formulaire
-    const destinationEmail = process.env.CONTACT_EMAIL;
-    if (!destinationEmail) {
-      console.error("CONTACT_EMAIL environment variable is not set");
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Configuration serveur incomplète. Veuillez contacter l'administrateur.",
-        },
-        { status: 500 },
-      );
-    }
+    const destinationEmail = env.CONTACT_EMAIL;
 
     try {
       // Utiliser la fonction d'envoi d'email définie dans utils/email.ts
