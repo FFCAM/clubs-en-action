@@ -30,8 +30,8 @@ importers:
         specifier: ^0.513.0
         version: 0.513.0(react@19.2.1)
       next:
-        specifier: 15.5.7
-        version: 15.5.7(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        specifier: 15.5.8
+        version: 15.5.8(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react:
         specifier: ^19.1.2
         version: 19.2.1
@@ -62,7 +62,7 @@ importers:
         version: 7.27.1(@babel/core@7.27.4)
       '@cloudflare/next-on-pages':
         specifier: ^1.13.16
-        version: 1.13.16(@cloudflare/workers-types@4.20250606.0)(next@15.5.7(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(vercel@48.12.1(typescript@5.8.3))(wrangler@4.19.1(@cloudflare/workers-types@4.20250606.0))
+        version: 1.13.16(@cloudflare/workers-types@4.20250606.0)(next@15.5.8(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(vercel@48.12.1(typescript@5.8.3))(wrangler@4.19.1(@cloudflare/workers-types@4.20250606.0))
       '@cloudflare/workers-types':
         specifier: ^4.20250606.0
         version: 4.20250606.0
@@ -1474,8 +1474,8 @@ packages:
   '@napi-rs/wasm-runtime@1.1.0':
     resolution: {integrity: sha512-Fq6DJW+Bb5jaWE69/qOE0D1TUN9+6uWhCeZpdnSBk14pjLcCWR7Q8n49PTSPHazM37JqrsdpEthXy2xn6jWWiA==}
 
-  '@next/env@15.5.7':
-    resolution: {integrity: sha512-4h6Y2NyEkIEN7Z8YxkA27pq6zTkS09bUSYC0xjd0NpwFxjnIKeZEeH591o5WECSmjpUhLn3H2QLJcDye3Uzcvg==}
+  '@next/env@15.5.8':
+    resolution: {integrity: sha512-ejZHa3ogTxcy851dFoNtfB5B2h7AbSAtHbR5CymUlnz4yW1QjHNufVpvTu8PTnWBKFKjrd4k6Gbi2SsCiJKvxw==}
 
   '@next/eslint-plugin-next@15.3.6':
     resolution: {integrity: sha512-gvt7l1r4N0zHCXyXYj39ObrTBr8TxyA/306Z/kjseYk6hiefu3zexRKRVjVmQqUpxe9oxyfYWMZFtsBYPgr1oA==}
@@ -3808,8 +3808,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  next@15.5.7:
-    resolution: {integrity: sha512-+t2/0jIJ48kUpGKkdlhgkv+zPTEOoXyr60qXe68eB/pl3CMJaLeIGjzp5D6Oqt25hCBiBTt8wEeeAzfJvUKnPQ==}
+  next@15.5.8:
+    resolution: {integrity: sha512-Tma2R50eiM7Fx6fbDeHiThq7sPgl06mBr76j6Ga0lMFGrmaLitFsy31kykgb8Z++DR2uIEKi2RZ0iyjIwFd15Q==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -5791,7 +5791,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@cloudflare/next-on-pages@1.13.16(@cloudflare/workers-types@4.20250606.0)(next@15.5.7(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(vercel@48.12.1(typescript@5.8.3))(wrangler@4.19.1(@cloudflare/workers-types@4.20250606.0))':
+  '@cloudflare/next-on-pages@1.13.16(@cloudflare/workers-types@4.20250606.0)(next@15.5.8(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(vercel@48.12.1(typescript@5.8.3))(wrangler@4.19.1(@cloudflare/workers-types@4.20250606.0))':
     dependencies:
       acorn: 8.14.1
       ast-types: 0.14.2
@@ -5802,7 +5802,7 @@ snapshots:
       esbuild: 0.25.4
       js-yaml: 4.1.1
       miniflare: 3.20250408.2
-      next: 15.5.7(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next: 15.5.8(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       package-manager-manager: 0.2.0
       pcre-to-regexp: 1.1.0
       semver: 7.7.2
@@ -6455,7 +6455,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@next/env@15.5.7': {}
+  '@next/env@15.5.8': {}
 
   '@next/eslint-plugin-next@15.3.6':
     dependencies:
@@ -9316,9 +9316,9 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next@15.5.7(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  next@15.5.8(@babel/core@7.27.4)(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
-      '@next/env': 15.5.7
+      '@next/env': 15.5.8
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001721
       postcss: 8.4.31
