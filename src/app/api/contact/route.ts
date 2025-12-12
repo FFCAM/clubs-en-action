@@ -4,8 +4,6 @@ import { verifyCSRFToken } from "@/utils/csrf";
 import { isValidEmail } from "@/utils/validation";
 import { env } from "@/env";
 
-export const runtime = "edge";
-
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
