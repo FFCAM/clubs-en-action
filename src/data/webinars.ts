@@ -55,6 +55,14 @@ export const webinars: Webinar[] = [
     endTime: "20:30",
     description: "Présentation de la réglementation et des responsabilités liées aux Équipements de Protection Individuelle (EPIs) dans les clubs, suivie de retours d'expérience sur les solutions mises en place par les clubs pour gérer ces équipements.",
     zoomLink: "https://us02web.zoom.us/j/83125077276"
+  },
+  {
+    id: 5,
+    title: "Les nouvelles formations à l'environnement",
+    date: "2026-01-14",
+    time: "18:30",
+    endTime: "20:00",
+    description: "Découvrez les nouvelles formations à l'environnement proposées par la FFCAM et comment votre club peut en bénéficier."
   }
 ];
 
