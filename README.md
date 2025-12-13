@@ -3,7 +3,7 @@
 [![Deploy to Cloudflare Pages](https://github.com/ffcam/clubs-en-action/actions/workflows/cloudflare-pages-deploy.yml/badge.svg)](https://github.com/ffcam/clubs-en-action/actions/workflows/cloudflare-pages-deploy.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/) [![Keyway Secrets](https://www.keyway.sh/badge.svg?repo=FFCAM/clubs-en-action)](https://www.keyway.sh/vaults/FFCAM/clubs-en-action)
 
 ## 🎯 Description du projet
 
