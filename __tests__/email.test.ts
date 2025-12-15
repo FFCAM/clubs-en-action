@@ -4,11 +4,11 @@
 
 // Mock de l'environnement avant l'import
 jest.mock("@/env", () => ({
-  env: {
+  getEnv: () => ({
     RESEND_API_KEY: "test-resend-api-key",
     CONTACT_EMAIL: "test@example.com",
     CSRF_SECRET: "test-csrf-secret-minimum-32-characters-long",
-  },
+  }),
 }));
 
 // Mock de fetch global
