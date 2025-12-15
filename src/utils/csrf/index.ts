@@ -1,4 +1,4 @@
-import { env } from "@/env";
+import { getEnv } from "@/env";
 
 /**
  * CSRF Protection Utils pour Cloudflare Edge Runtime
@@ -15,7 +15,7 @@ const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9
  * Génère une clé HMAC à partir du secret
  */
 async function getHmacKey(): Promise<CryptoKey> {
-  const secret = env.CSRF_SECRET;
+  const secret = getEnv().CSRF_SECRET;
 
   const encoder = new TextEncoder();
   const keyData = encoder.encode(secret);

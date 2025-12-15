@@ -6,4 +6,17 @@ const envSchema = z.object({
   CSRF_SECRET: z.string().min(32, "CSRF_SECRET doit faire au moins 32 caractères"),
 });
 
-export const env = envSchema.parse(process.env);
+type Env = z.infer<typeof envSchema>;
+
+let _env: Env | null = null;
+
+/**
+ * Get validated environment variables.
+ * Validates once on first call, then returns cached result.
+ */
+export function getEnv(): Env {
+  if (!_env) {
+    _env = envSchema.parse(process.env);
+  }
+  return _env;
+}

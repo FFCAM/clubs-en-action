@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendContactFormEmail, ContactFormData } from "@/utils/email";
 import { verifyCSRFToken } from "@/utils/csrf";
 import { isValidEmail } from "@/utils/validation";
-import { env } from "@/env";
+import { getEnv } from "@/env";
 
 export const runtime = "edge";
 
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     console.log("Nouvelle soumission de formulaire:", data);
 
     // Adresse de destination pour recevoir les notifications du formulaire
-    const destinationEmail = env.CONTACT_EMAIL;
+    const destinationEmail = getEnv().CONTACT_EMAIL;
 
     try {
       // Utiliser la fonction d'envoi d'email définie dans utils/email.ts

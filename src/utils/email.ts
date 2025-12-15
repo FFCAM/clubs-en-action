@@ -1,4 +1,4 @@
-import { env } from "@/env";
+import { getEnv } from "@/env";
 
 /**
  * Échappe les caractères HTML pour prévenir les attaques XSS
@@ -61,7 +61,7 @@ export async function sendEmail(options: {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        Authorization: `Bearer ${getEnv().RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
