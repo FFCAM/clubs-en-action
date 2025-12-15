@@ -2,8 +2,39 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { getPastWebinars, getNextWebinars } from "@/data/webinars";
+import { ArrowRight, Video, ExternalLink } from "lucide-react";
+import { getPastWebinars, getNextWebinars, type Webinar } from "@/data/webinars";
+
+/**
+ * Check if a webinar is happening today
+ */
+function isToday(dateString: string): boolean {
+  const today = new Date();
+  const webinarDate = new Date(dateString);
+  return (
+    today.getFullYear() === webinarDate.getFullYear() &&
+    today.getMonth() === webinarDate.getMonth() &&
+    today.getDate() === webinarDate.getDate()
+  );
+}
+
+/**
+ * Check if a webinar date is in the past (not including today)
+ */
+function isPastDate(dateString: string): boolean {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const webinarDate = new Date(dateString);
+  return webinarDate < today;
+}
+
+/**
+ * Get today's webinar if any
+ */
+function getTodayWebinar(): Webinar | undefined {
+  const nextWebinars = getNextWebinars();
+  return nextWebinars.find(w => isToday(w.date));
+}
 
 /**
  * Format webinar date and time for display
@@ -24,12 +55,45 @@ export default function HeroSection() {
   // Get webinars: prioritize upcoming ones, then show recent past ones
   const nextWebinars = getNextWebinars();
   const pastWebinars = getPastWebinars();
+  const todayWebinar = getTodayWebinar();
 
   // Show up to 3 webinars total: all upcoming ones first, then most recent past ones
   const allWebinars = [...nextWebinars, ...pastWebinars].slice(0, 3);
 
   return (
-    <section className="relative py-20 overflow-hidden sm:py-28">
+    <>
+      {/* Bannière pour le webinaire du jour */}
+      {todayWebinar && todayWebinar.zoomLink && (
+        <div className="relative z-50 bg-gradient-to-r from-ffcam-red to-red-600">
+          <div className="px-4 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+              <div className="flex items-center gap-3 text-white">
+                <span className="relative flex w-3 h-3">
+                  <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-white"></span>
+                  <span className="relative inline-flex w-3 h-3 bg-white rounded-full"></span>
+                </span>
+                <span className="text-sm font-semibold sm:text-base">
+                  <span className="hidden sm:inline">Webinaire ce soir : </span>
+                  <span className="sm:hidden">Ce soir : </span>
+                  {todayWebinar.title} à {todayWebinar.time.replace(':', 'h')}
+                </span>
+              </div>
+              <a
+                href={todayWebinar.zoomLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-ffcam-red transition bg-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-ffcam-red"
+              >
+                <Video className="w-4 h-4" />
+                Rejoindre le Zoom
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section className="relative py-20 overflow-hidden sm:py-28">
       {/* Image de montagne en arrière-plan */}
       <div className="absolute inset-0">
         <Image
@@ -105,23 +169,42 @@ export default function HeroSection() {
               </div>
               <div className="space-y-2 text-xs text-white sm:text-sm">
                 {allWebinars.map((webinar) => {
-                  const isPast = new Date(webinar.date) < new Date();
-                  const icon = isPast ? "✅" : "📅";
+                  const isTodayWebinar = isToday(webinar.date);
+                  const isPast = isPastDate(webinar.date);
+                  const icon = isTodayWebinar ? "🔴" : (isPast ? "✅" : "📅");
                   const formattedDate = formatWebinarDate(webinar.date, webinar.time, webinar.endTime);
 
+                  // For today's webinar with zoom link, link directly to zoom
                   // For upcoming webinars without recording, link to webinars section
-                  const linkHref = webinar.recordingLink || (!isPast ? "/#webinaires" : null);
+                  const linkHref = isTodayWebinar && webinar.zoomLink
+                    ? webinar.zoomLink
+                    : (webinar.recordingLink || (!isPast ? "/#webinaires" : null));
+
+                  const isExternalLink = linkHref?.startsWith('http');
 
                   return (
                     <div key={webinar.id} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                      <span className="font-medium">{icon} {formattedDate} :</span>
+                      <span className={`font-medium ${isTodayWebinar ? 'text-yellow-200' : ''}`}>
+                        {icon} {formattedDate} :
+                      </span>
                       {linkHref ? (
-                        <Link
-                          href={linkHref}
-                          className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded"
-                        >
-                          {webinar.title}
-                        </Link>
+                        isExternalLink ? (
+                          <a
+                            href={linkHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded ${isTodayWebinar ? 'text-yellow-200 font-semibold' : ''}`}
+                          >
+                            {webinar.title} {isTodayWebinar && '→ Rejoindre'}
+                          </a>
+                        ) : (
+                          <Link
+                            href={linkHref}
+                            className="hover:text-ffcam-red transition-colors underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 rounded"
+                          >
+                            {webinar.title}
+                          </Link>
+                        )
                       ) : (
                         <span>{webinar.title}</span>
                       )}
@@ -155,5 +238,6 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }
