@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Video, ExternalLink } from "lucide-react";
@@ -55,7 +56,13 @@ export default function HeroSection() {
   // Get webinars: prioritize upcoming ones, then show recent past ones
   const nextWebinars = getNextWebinars();
   const pastWebinars = getPastWebinars();
-  const todayWebinar = getTodayWebinar();
+
+  // Only compute todayWebinar on client to avoid hydration mismatch
+  const [todayWebinar, setTodayWebinar] = useState<Webinar | undefined>(undefined);
+
+  useEffect(() => {
+    setTodayWebinar(getTodayWebinar());
+  }, []);
 
   // Show up to 3 webinars total: all upcoming ones first, then most recent past ones
   const allWebinars = [...nextWebinars, ...pastWebinars].slice(0, 3);
