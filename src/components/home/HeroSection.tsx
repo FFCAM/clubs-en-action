@@ -182,10 +182,10 @@ export default function HeroSection() {
                   const formattedDate = formatWebinarDate(webinar.date, webinar.time, webinar.endTime);
 
                   // For today's webinar with zoom link, link directly to zoom
-                  // For upcoming webinars without recording, link to webinars section
+                  // For upcoming webinars without summary, link to webinars section
                   const linkHref = isTodayWebinar && webinar.zoomLink
                     ? webinar.zoomLink
-                    : (webinar.recordingLink || (!isPast ? "/#webinaires" : null));
+                    : (webinar.summaryLink || (!isPast ? "/#webinaires" : null));
 
                   const isExternalLink = linkHref?.startsWith('http');
 

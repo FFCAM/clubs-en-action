@@ -12,7 +12,7 @@ export interface Webinar {
   time: string; // HH:MM format
   endTime: string; // HH:MM format
   description: string;
-  recordingLink?: string; // For past webinars
+  summaryLink?: string; // Link to the summary page for past webinars
   zoomLink?: string; // For upcoming webinars
 }
 
@@ -27,7 +27,7 @@ export const webinars: Webinar[] = [
     time: "20:00",
     endTime: "21:30",
     description: "Exploration des outils numériques qui facilitent la collaboration au sein de votre club : communication interne, gestion de projets, partage de documents, organisation d'événements. Des solutions concrètes présentées par des clubs qui les utilisent au quotidien.",
-    recordingLink: "/webinaires/outils-collaboratifs"
+    summaryLink: "/webinaires/outils-collaboratifs"
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const webinars: Webinar[] = [
     time: "18:00",
     endTime: "19:30",
     description: "Découvrez comment développer des partenariats avec les associations environnementales et les gestionnaires d'espaces protégés pour enrichir vos activités tout en préservant la nature.",
-    recordingLink: "/webinaires/environnement-partenariats"
+    summaryLink: "/webinaires/environnement-partenariats"
   },
   {
     id: 3,
@@ -45,16 +45,16 @@ export const webinars: Webinar[] = [
     time: "18:30",
     endTime: "20:00",
     description: "Découvrez comment votre club peut s'engager dans la préservation de l'environnement à travers le programme des refuges phares. Échanges sur les bonnes pratiques, initiatives locales et partenariats durables.",
-    recordingLink: "/webinaires/refuges-phares"
+    summaryLink: "/webinaires/refuges-phares"
   },
   {
     id: 4,
     title: "Gestion des EPIs dans les clubs",
-    date: "2025-12-15",
+    date: "2025-12-16",
     time: "19:00",
     endTime: "20:30",
     description: "Présentation de la réglementation et des responsabilités liées aux Équipements de Protection Individuelle (EPIs) dans les clubs, suivie de retours d'expérience sur les solutions mises en place par les clubs pour gérer ces équipements.",
-    zoomLink: "https://us02web.zoom.us/j/83125077276"
+    summaryLink: "/webinaires/gestion-epi"
   },
   {
     id: 5,

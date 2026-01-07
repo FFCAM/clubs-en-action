@@ -43,7 +43,6 @@ export default function WebinarsSection() {
 
   const upcomingThemes = [
     "Suite d'outils collaboratifs",
-    "Gestion des EPIs",
     "Gestion de bibliothèque",
     "Communication interne",
     "Recruter et valoriser les bénévoles",
@@ -208,8 +207,8 @@ export default function WebinarsSection() {
                     </div>
                     <p className="text-sm text-gray-600 sm:text-base">{webinar.description}</p>
                     <div className="flex flex-col gap-2 pt-3 sm:gap-3 sm:pt-4">
-                      {webinar.recordingLink && (
-                        <Link href={webinar.recordingLink}>
+                      {webinar.summaryLink && (
+                        <Link href={webinar.summaryLink}>
                           <FFCAMButton
                             variant="primary"
                             size="sm"
