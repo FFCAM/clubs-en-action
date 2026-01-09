@@ -63,6 +63,14 @@ export const webinars: Webinar[] = [
     time: "18:30",
     endTime: "20:00",
     description: "Découvrez les nouvelles formations à l'environnement proposées par la FFCAM et comment votre club peut en bénéficier."
+  },
+  {
+    id: 6,
+    title: "Que la montagne est belle... sous les étoiles !",
+    date: "2026-02-10",
+    time: "18:30",
+    endTime: "20:00",
+    description: "Découvrez comment organiser en 2026 dans votre club une opération Que la Montagne est belle ! qui met en valeur vos pratiques sportives respectueuses des milieux naturels. Le thème choisi cette année : sous les étoiles. Webinaire animé par Alexandra Vaudatin, membre de la commission environnement."
   }
 ];
 
