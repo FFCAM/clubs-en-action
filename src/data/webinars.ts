@@ -72,6 +72,14 @@ export const webinars: Webinar[] = [
     time: "18:30",
     endTime: "20:00",
     description: "Découvrez comment organiser en 2026 dans votre club une opération Que la Montagne est belle ! qui met en valeur vos pratiques sportives respectueuses des milieux naturels. Le thème choisi cette année : sous les étoiles. Webinaire animé par Alexandra Vaudatin, membre de la commission environnement."
+  },
+  {
+    id: 7,
+    title: "Ramassage de déchets en montagne",
+    date: "2026-04-21",
+    time: "18:30",
+    endTime: "20:00",
+    description: "Découvrez comment organiser dans votre club une opération de ramassage de déchets en montagne, grâce au partenariat entre la FFCAM et le programme Montagne zéro déchet de Mountain riders. Webinaire animé par la commission environnement avec notre partenaire Mountain riders."
   }
 ];
 
