@@ -8,30 +8,30 @@ on:
 jobs:
   validate-and-test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
           run_install: false
-          
+
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      
+
       - name: Setup pnpm cache
         uses: actions/cache@v4
         with:
@@ -39,74 +39,22 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      
+
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      
+
       - name: Lint
         run: pnpm lint
-        
+
       - name: Type check
         run: pnpm tsc --noEmit
-        
+
       - name: Run tests
         run: pnpm test
-      
+
       - name: Build application
         run: pnpm build
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-
-      - name: Start Next.js server
-        run: pnpm start &
-        env:
-          NODE_ENV: production
-
-      - name: Wait for Next.js to be ready
-        run: npx wait-on http://localhost:3000
-
-      # Deployment to Cloudflare Pages has been disabled
-      # - name: Build Preview
-      #   id: preview-deployment
-      #   if: success()
-      #   uses: cloudflare/wrangler-action@v3
-      #   with:
-      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      #     command: pages deploy .vercel/output --project-name=clubs-en-action --branch=pr-${{ github.event.number }}
-      #     gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install dependencies for Lighthouse CI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq chromium-browser
-          
-      - name: Install Lighthouse CI
-        run: npm install -g @lhci/cli@0.11.x puppeteer
-
-      - name: Run Lighthouse CI
-        id: lighthouse-ci
-        run: |
-          export CHROME_PATH=$(which chromium-browser)
-          lhci autorun --collect.chromePath="$CHROME_PATH" --collect.settings.onlyCategories="accessibility,best-practices,seo" --collect.settings.preset="desktop"
-          echo "LIGHTHOUSE_RESULT_URL=$(cat .lighthouseci/links.json | jq -r '.links[0].url')" >> $GITHUB_OUTPUT
-        continue-on-error: true
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Add status comment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const lighthouseResultUrl = "${{ steps.lighthouse-ci.outputs.LIGHTHOUSE_RESULT_URL }}";
-            const statusMessage = lighthouseResultUrl 
-              ? `✅ La validation du build et des tests a réussi ! La PR est prête à être revue.\n\n📊 [Rapport Lighthouse](${ lighthouseResultUrl })`
-              : '✅ La validation du build et des tests a réussi ! La PR est prête à être revue.';
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: statusMessage
-            })
+          RESEND_API_KEY: test_key
+          CONTACT_EMAIL: test@example.com
+          CSRF_SECRET: test_csrf_secret_that_is_at_least_32_chars
