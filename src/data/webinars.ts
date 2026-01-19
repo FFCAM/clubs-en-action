@@ -62,8 +62,8 @@ export const webinars: Webinar[] = [
     date: "2026-01-14",
     time: "18:30",
     endTime: "20:00",
-    description: "Découvrez les nouvelles formations à l'environnement proposées par la FFCAM et comment votre club peut en bénéficier.",
-    zoomLink: "https://us02web.zoom.us/j/89195807822"
+    description: "Découvrez le nouveau brevet fédéral Instructeur Avenir Montagne, dédié à la redirection écologique et à la protection des milieux naturels et montagnards.",
+    summaryLink: "/webinaires/formations-environnement"
   },
   {
     id: 6,
