@@ -14,6 +14,7 @@ export interface Webinar {
   description: string;
   summaryLink?: string; // Link to the summary page for past webinars
   zoomLink?: string; // For upcoming webinars
+  zoomAccessCode?: string; // Access code for Zoom meeting
 }
 
 /**
@@ -71,7 +72,9 @@ export const webinars: Webinar[] = [
     date: "2026-02-10",
     time: "18:30",
     endTime: "20:00",
-    description: "Découvrez comment organiser en 2026 dans votre club une opération Que la Montagne est belle ! qui met en valeur vos pratiques sportives respectueuses des milieux naturels. Le thème choisi cette année : sous les étoiles. Webinaire animé par Alexandra Vaudatin, membre de la commission environnement."
+    description: "Découvrez comment organiser en 2026 dans votre club une opération Que la Montagne est belle ! qui met en valeur vos pratiques sportives respectueuses des milieux naturels. Le thème choisi cette année : sous les étoiles. Webinaire animé par Alexandra Vaudatin, membre de la commission environnement.",
+    zoomLink: "https://us02web.zoom.us/j/86312694778",
+    zoomAccessCode: "534955"
   },
   {
     id: 7,

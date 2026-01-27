@@ -113,7 +113,7 @@ export default function WebinarsSection() {
                           <AddToCalendarButton
                             name={webinar.title}
                             language="fr"
-                            description={webinar.description + (webinar.zoomLink ? `\n\nLien Zoom: ${webinar.zoomLink}` : "\n\nLien Zoom à venir")}
+                            description={webinar.description + (webinar.zoomLink ? `\n\nLien Zoom: ${webinar.zoomLink}${webinar.zoomAccessCode ? `\nCode d'accès: ${webinar.zoomAccessCode}` : ''}` : "\n\nLien Zoom à venir")}
                             startDate={webinar.date}
                             startTime={webinar.time}
                             endTime={webinar.endTime || ""}
@@ -157,6 +157,11 @@ export default function WebinarsSection() {
                           >
                             {copiedId === webinar.id ? "Lien copié !" : "Copier le lien"}
                           </FFCAMButton>
+                          {webinar.zoomAccessCode && (
+                            <p className="text-xs text-center text-gray-500">
+                              Code d&apos;accès : <span className="font-medium">{webinar.zoomAccessCode}</span>
+                            </p>
+                          )}
                         </>
                       ) : (
                         <FFCAMButton
