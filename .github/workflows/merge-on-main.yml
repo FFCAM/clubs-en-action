@@ -51,16 +51,20 @@ jobs:
       - name: Build application
         run: pnpm build
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 'test_resend_api_key_for_ci' }}
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'test@example.com' }}
+          CSRF_SECRET: ${{ secrets.CSRF_SECRET || 'test_csrf_secret_for_ci_at_least_32_chars' }}
 
       - name: Start Next.js server
         run: pnpm start &
         env:
           NODE_ENV: production
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 'test_resend_api_key_for_ci' }}
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'test@example.com' }}
+          CSRF_SECRET: ${{ secrets.CSRF_SECRET || 'test_csrf_secret_for_ci_at_least_32_chars' }}
 
       - name: Wait for Next.js to be ready
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:3000 --timeout 60000
 
       - name: Install Lighthouse CI and Chromium
         run: |
