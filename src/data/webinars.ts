@@ -73,8 +73,7 @@ export const webinars: Webinar[] = [
     time: "18:30",
     endTime: "20:00",
     description: "Découvrez comment organiser en 2026 dans votre club une opération Que la Montagne est belle ! qui met en valeur vos pratiques sportives respectueuses des milieux naturels. Le thème choisi cette année : sous les étoiles. Webinaire animé par Alexandra Vaudatin, membre de la commission environnement.",
-    zoomLink: "https://us02web.zoom.us/j/86312694778",
-    zoomAccessCode: "534955"
+    summaryLink: "/webinaires/montagne-sous-les-etoiles"
   },
   {
     id: 7,
