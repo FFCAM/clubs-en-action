@@ -89,20 +89,21 @@ export async function POST(request: NextRequest) {
     // Adresse de destination pour recevoir les notifications du formulaire
     const destinationEmail = getEnv().CONTACT_EMAIL;
 
-    try {
-      // Utiliser la fonction d'envoi d'email définie dans utils/email.ts
-      const emailResult = await sendContactFormEmail(data, destinationEmail);
+    // Utiliser la fonction d'envoi d'email définie dans utils/email.ts
+    const emailResult = await sendContactFormEmail(data, destinationEmail);
 
-      if (emailResult && "success" in emailResult && !emailResult.success) {
-        console.error("Erreur lors de l'envoi de l'email:", emailResult.error);
-        // On continue malgré l'erreur d'envoi
-      } else if (emailResult && "success" in emailResult) {
-        console.log("Email envoyé avec succès via Resend, ID:", emailResult.id);
-      }
-    } catch (emailError) {
-      console.error("Exception lors de l'envoi de l'email:", emailError);
-      // On continue malgré l'erreur d'envoi
+    if (!emailResult.success) {
+      console.error("Erreur lors de l'envoi de l'email:", emailResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer ultérieurement.",
+        },
+        { status: 502 },
+      );
     }
+
+    console.log("Email envoyé avec succès via Resend, ID:", emailResult.id);
 
     return NextResponse.json(
       {

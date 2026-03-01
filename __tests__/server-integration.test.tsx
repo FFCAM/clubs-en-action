@@ -39,7 +39,7 @@ describe('Intégration serveur', () => {
       const response = await fetch(`${SERVER_URL}/api/csrf`);
       expect(response.status).toBe(200);
       
-      const data = await response.json();
+      const data = await response.json() as { csrfToken: string; success: boolean };
       expect(data).toHaveProperty('csrfToken');
       expect(data.success).toBe(true);
     });
