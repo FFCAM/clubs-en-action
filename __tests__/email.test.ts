@@ -86,6 +86,7 @@ describe("email.ts", () => {
       });
 
       const result = await sendEmail({
+        from: "Test <test@example.com>",
         to: "dest@example.com",
         subject: "Test Subject",
         text: "Test content",
@@ -112,6 +113,7 @@ describe("email.ts", () => {
       });
 
       const result = await sendEmail({
+        from: "Test <test@example.com>",
         to: "dest@example.com",
         subject: "Test",
         text: "Test",
@@ -121,10 +123,29 @@ describe("email.ts", () => {
       expect(result.error).toBe("Invalid API key");
     });
 
+    it("gère les erreurs Resend au format { message }", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: false,
+        status: 403,
+        json: async () => ({ statusCode: 403, message: "The from address is not verified", name: "validation_error" }),
+      });
+
+      const result = await sendEmail({
+        from: "Test <test@bad-domain.com>",
+        to: "dest@example.com",
+        subject: "Test",
+        text: "Test",
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe("The from address is not verified");
+    });
+
     it("gère les exceptions réseau", async () => {
       mockFetch.mockRejectedValueOnce(new Error("Network error"));
 
       const result = await sendEmail({
+        from: "Test <test@example.com>",
         to: "dest@example.com",
         subject: "Test",
         text: "Test",
@@ -155,6 +176,27 @@ describe("email.ts", () => {
   });
 
   describe("sendContactFormEmail", () => {
+    it("utilise noreply@h9.lol comme adresse d'expéditeur", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ id: "test-id" }),
+      });
+
+      const formData: ContactFormData = {
+        name: "Test",
+        email: "test@example.com",
+        club: "Club",
+        message: "Message",
+      };
+
+      await sendContactFormEmail(formData, "dest@example.com");
+
+      const callArgs = mockFetch.mock.calls[0];
+      const body = JSON.parse(callArgs[1].body);
+
+      expect(body.from).toBe("Clubs en Action <noreply@h9.lol>");
+    });
+
     it("formate correctement le sujet avec nom et club", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
