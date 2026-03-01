@@ -134,13 +134,14 @@ describe("email.ts", () => {
       expect(result.error).toBe("Network error");
     });
 
-    it("utilise l'expéditeur par défaut si non spécifié", async () => {
+    it("envoie avec l'expéditeur spécifié", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: async () => ({ id: "test-id" }),
       });
 
       await sendEmail({
+        from: "Test <test@example.com>",
         to: "dest@example.com",
         subject: "Test",
         text: "Test",
@@ -149,7 +150,7 @@ describe("email.ts", () => {
       const callArgs = mockFetch.mock.calls[0];
       const body = JSON.parse(callArgs[1].body);
 
-      expect(body.from).toBe("Clubs en Action <noreply@calmo.app>");
+      expect(body.from).toBe("Test <test@example.com>");
     });
   });
 

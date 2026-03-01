@@ -38,7 +38,7 @@ export interface ContactFormData {
  * Envoie un email via l'API Resend
  */
 export async function sendEmail(options: {
-  from?: string;
+  from: string;
   to: string;
   subject: string;
   text?: string;
@@ -49,7 +49,7 @@ export async function sendEmail(options: {
   try {
     // Préparer les données pour l'API Resend
     const payload = {
-      from: options.from || "Clubs en Action <noreply@calmo.app>",
+      from: options.from,
       to: options.to,
       subject: options.subject,
       text: options.text,
@@ -68,12 +68,12 @@ export async function sendEmail(options: {
     });
 
     // Traiter la réponse
-    const data = (await response.json()) as { id?: string; error?: { message?: string } };
+    const data = (await response.json()) as { id?: string; message?: string; error?: { message?: string } };
 
     if (!response.ok || data.error) {
       const errorMessage =
-        (data.error?.message) || "Erreur inconnue lors de l'envoi de l'email";
-      console.error("Erreur Resend:", errorMessage);
+        data.error?.message || data.message || `Erreur Resend HTTP ${response.status}`;
+      console.error("Erreur Resend:", errorMessage, JSON.stringify(data));
       return {
         success: false,
         error: errorMessage,
@@ -180,6 +180,7 @@ export async function sendContactFormEmail(
 
   // Envoi de l'email
   return sendEmail({
+    from: "Clubs en Action <noreply@h9.lol>",
     to: toEmail,
     subject: subject2,
     text: textBody,
