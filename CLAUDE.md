@@ -91,11 +91,11 @@ All variables are validated at startup with Zod (`src/env.ts`). The app will fai
 - `CSRF_SECRET` - Secret for HMAC signing of CSRF tokens (minimum 32 characters)
 
 ### Cloudflare Integration
-- Uses `@cloudflare/next-on-pages` for deployment
-- KV namespace binding: `CLUBS_KV` (configured in wrangler.jsonc)
+- Uses `@cloudflare/next-on-pages` for deployment to Cloudflare Pages
 - Edge runtime required for all API routes
 - Static assets served from `.vercel/output/static` directory
-- Compatibility date: 2025-05-10 with nodejs_compat flag
+- Compatibility date: 2025-11-01 with nodejs_compat flag
+- Auto-deploy on push to main via GitHub Actions
 
 ### Font Loading
 The application uses Poppins font loaded locally via Next.js font optimization (no external font requests).

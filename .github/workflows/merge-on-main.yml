@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build, Test & Deploy
 
 on:
   push:
@@ -23,10 +23,7 @@ jobs:
           node-version: 22
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
+        uses: pnpm/action-setup@v4
 
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -78,3 +75,17 @@ jobs:
         env:
           CHROME_PATH: /usr/bin/chromium-browser
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build for Cloudflare Pages
+        run: pnpm pages:build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 'test_resend_api_key_for_ci' }}
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'test@example.com' }}
+          CSRF_SECRET: ${{ secrets.CSRF_SECRET || 'test_csrf_secret_for_ci_at_least_32_chars' }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .vercel/output/static --project-name=clubs-en-action
