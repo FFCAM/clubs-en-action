@@ -113,7 +113,7 @@ export default function WebinarsSection() {
                           <AddToCalendarButton
                             name={webinar.title}
                             language="fr"
-                            description={webinar.description + (webinar.zoomLink ? `\n\nLien Zoom: ${webinar.zoomLink}${webinar.zoomAccessCode ? `\nCode d'accès: ${webinar.zoomAccessCode}` : ''}` : "\n\nLien Zoom à venir")}
+                            description={webinar.description + (webinar.registrationLink ? `\n\nInscription: ${webinar.registrationLink}` : webinar.zoomLink ? `\n\nLien Zoom: ${webinar.zoomLink}${webinar.zoomAccessCode ? `\nCode d'accès: ${webinar.zoomAccessCode}` : ''}` : "\n\nLien Zoom à venir")}
                             startDate={webinar.date}
                             startTime={webinar.time}
                             endTime={webinar.endTime || ""}
@@ -137,7 +137,17 @@ export default function WebinarsSection() {
                           Date à venir
                         </FFCAMButton>
                       )}
-                      {webinar.zoomLink ? (
+                      {webinar.registrationLink ? (
+                        <FFCAMButton
+                          variant="secondary"
+                          size="sm"
+                          icon={<UserPlus className="w-4 h-4" />}
+                          onClick={() => window.open(webinar.registrationLink, '_blank')}
+                          className="justify-center w-full text-sm"
+                        >
+                          S&apos;inscrire au webinaire
+                        </FFCAMButton>
+                      ) : webinar.zoomLink ? (
                         <>
                           <FFCAMButton
                             variant="secondary"

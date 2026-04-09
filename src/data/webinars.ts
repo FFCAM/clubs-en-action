@@ -15,6 +15,7 @@ export interface Webinar {
   summaryLink?: string; // Link to the summary page for past webinars
   zoomLink?: string; // For upcoming webinars
   zoomAccessCode?: string; // Access code for Zoom meeting
+  registrationLink?: string; // Registration link for upcoming webinars (e.g. Zoom registration)
 }
 
 /**
@@ -81,7 +82,8 @@ export const webinars: Webinar[] = [
     date: "2026-04-21",
     time: "18:30",
     endTime: "20:00",
-    description: "Découvrez comment organiser dans votre club une opération de ramassage de déchets en montagne, grâce au partenariat entre la FFCAM et le programme Montagne zéro déchet de Mountain riders. Webinaire animé par la commission environnement avec notre partenaire Mountain riders."
+    description: "Découvrez comment organiser dans votre club une opération de ramassage de déchets en montagne, grâce au partenariat entre la FFCAM et le programme Montagne zéro déchet de Mountain riders. Webinaire animé par la commission environnement avec notre partenaire Mountain riders.",
+    registrationLink: "https://us02web.zoom.us/meeting/register/EYld1R-tQKaIW35MWO_Cyw"
   }
 ];
 
