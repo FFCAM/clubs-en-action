@@ -83,7 +83,7 @@ export const webinars: Webinar[] = [
     time: "18:30",
     endTime: "20:00",
     description: "Découvrez comment organiser dans votre club une opération de ramassage de déchets en montagne, grâce au partenariat entre la FFCAM et le programme Montagne zéro déchet de Mountain riders. Webinaire animé par la commission environnement avec notre partenaire Mountain riders.",
-    registrationLink: "https://us02web.zoom.us/meeting/register/EYld1R-tQKaIW35MWO_Cyw"
+    registrationLink: "https://us02web.zoom.us/meeting/register/t7JE_RAqTe-KGiqgkLkFAg"
   }
 ];
 
