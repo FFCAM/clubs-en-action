@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
+      statuses: write # status check Lighthouse
 
     steps:
       - name: Checkout repository
@@ -55,7 +55,7 @@ jobs:
           CSRF_SECRET: ${{ secrets.CSRF_SECRET || 'test_csrf_secret_for_ci_at_least_32_chars' }}
 
       - name: Start Next.js server
-        run: pnpm start &
+        run: pnpm start > next-start.log 2>&1 &
         env:
           NODE_ENV: production
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 'test_resend_api_key_for_ci' }}
@@ -63,20 +63,28 @@ jobs:
           CSRF_SECRET: ${{ secrets.CSRF_SECRET || 'test_csrf_secret_for_ci_at_least_32_chars' }}
 
       - name: Wait for Next.js to be ready
-        run: timeout 60 bash -c 'until curl -sf -o /dev/null http://localhost:3000; do sleep 2; done'
+        run: |
+          for i in $(seq 1 30); do
+            curl -sf --max-time 5 -o /dev/null http://localhost:3000 && exit 0
+            sleep 2
+          done
+          echo "Le serveur Next.js n'a pas répondu en 60 s"
+          cat next-start.log
+          exit 1
 
-      - name: Install Lighthouse CI and Chromium
+      - name: Install Chromium
         run: |
           sudo apt-get update
           sudo apt-get install -y chromium-browser
-          npm install -g @lhci/cli@0.11.1
 
       - name: Run Lighthouse CI
         continue-on-error: true
-        run: lhci autorun
+        run: pnpm lhci
         env:
           CHROME_PATH: /usr/bin/chromium-browser
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # LHCI_GITHUB_TOKEN parle directement à l'API GitHub
+          # (LHCI_GITHUB_APP_TOKEN enverrait le token à l'infra Lighthouse)
+          LHCI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for Cloudflare Pages
         run: pnpm pages:build
