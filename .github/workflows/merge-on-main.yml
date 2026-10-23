@@ -73,16 +73,12 @@ jobs:
           cat next-start.log
           exit 1
 
-      - name: Install Chromium
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-
       - name: Run Lighthouse CI
         continue-on-error: true
         run: pnpm lhci
         env:
-          CHROME_PATH: /usr/bin/chromium-browser
+          # Google Chrome est préinstallé sur les runners ubuntu-latest (24.04 et 26.04)
+          CHROME_PATH: /usr/bin/google-chrome
           # LHCI_GITHUB_TOKEN parle directement à l'API GitHub
           # (LHCI_GITHUB_APP_TOKEN enverrait le token à l'infra Lighthouse)
           LHCI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
