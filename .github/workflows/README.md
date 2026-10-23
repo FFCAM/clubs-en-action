@@ -1,6 +1,6 @@
 # Workflows GitHub Actions
 
-Ce dossier contient les workflows GitHub Actions pour l'automatisation du déploiement et des tests du projet Clubs en Action. Ces workflows utilisent Node.js 22 LTS.
+Ce dossier contient les workflows GitHub Actions pour l'automatisation du déploiement et des tests du projet Clubs en Action. Ces workflows utilisent Node.js 24 LTS (version définie dans `.nvmrc`).
 
 ## Workflows disponibles
 

@@ -1,0 +1,19 @@
+# Réglages pnpm (le champ "pnpm" de package.json n'est plus lu)
+
+# N'installe pas une version publiée il y a moins de 3 jours (protection supply chain).
+# Pour un correctif urgent, ajouter le paquet dans minimumReleaseAgeExclude.
+minimumReleaseAge: 4320
+
+overrides:
+  form-data@>=4.0.0 <4.0.4: ^4.0.4
+  glob@>=10.2.0 <10.5.0: ^10.5.0
+  undici@>=4.5.0 <5.29.0: ^5.29.0
+  brace-expansion@>=1.0.0 <=1.1.11: ^1.1.12
+  brace-expansion@>=2.0.0 <=2.0.1: ^2.0.2
+  '@eslint/plugin-kit@<0.3.4': ^0.3.4
+  js-yaml@<3.14.2: ^3.14.2
+  js-yaml@>=4.0.0 <4.1.1: ^4.1.1
+  cookie@<0.7.0: ^0.7.0
+  esbuild@<=0.24.2: ^0.25.0
+  # next accepte ^0.34.3, vulnérable (CVE-2026-96889, RCE via SVG dans Image Optimization)
+  next>sharp: ^0.35.5
